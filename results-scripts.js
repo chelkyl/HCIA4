@@ -303,6 +303,11 @@ function updateSuggestions(query) {
     var data = getDBData();
     console.log("Data retrieved: " + data.length);
     var results = searchData(query, data);
+    if (results.length == 0) {
+        $('#results-status').addClass("results-status-visible");
+        return;
+    }
+    $('#results-status').removeClass("results-status-visible");
     console.log("Results found: " + results.length);
     var resultsSorted = sortResultsByDistance(results);
     var resultsArea = $('#results-area');
