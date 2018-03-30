@@ -1,18 +1,18 @@
-#lower-right-area {
+.lower-right-area {
     display: flex;
     flex-direction: column;
 }
 
-#filter-area {
+.filter-area {
     width: 100%;
     margin-bottom: 0;
 }
 
-#sort-area {
+.sort-area {
     height: 4rem;
 }
 
-#sort-select-container {
+.sort-select-container {
     display: inline-block;
 }
 
@@ -39,40 +39,37 @@
     border: none;
 }
 
-#search-area {
+.search-area {
     display: flex;
     height: 4rem;
     flex-direction: row;
     align-items: center;
 }
 
-#search-area label {
+.search-area > label {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 100%;
 }
 
-#results-area {
-    flex-grow: 1;
-}
-
-#search-icon {
+.search-icon {
     width: 3rem;
     padding: 0.75rem;
     padding-top: 0.35rem;
 }
 
-#search-inputarea {
+.search-inputarea {
     margin: 0;
     margin-left: 0.3rem;
     flex-grow: 1;
 }
 
-#results-area {
+.results-area {
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-grow: 1;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     overflow: auto;
@@ -80,11 +77,20 @@
 
 .result-item {
     width:100%;
+}
+
+.result-item > div {
     display: grid;
     grid-template-columns: 1fr 0fr 7fr 0fr 3fr 0fr 1fr;
     align-items: center;
     margin: 0.2rem 0;
     padding: 0.5rem 0;
+    color: unset;
+    cursor: pointer;
+}
+
+.result-item input[type=radio]:checked + div {
+    background-color: #eee;
 }
 
 .result-item-section {
@@ -103,9 +109,14 @@
     font-size: 2rem;
 }
 
-.result-item-section-name {
+.result-item-section-main {
     display: flex;
     flex-direction: column;
+    font-size: 1.2rem;
+}
+
+.result-item-section-name {
+    font-size: 1.6rem;
 }
 
 .result-item-section-amenities {
