@@ -8,15 +8,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="results-area.css">
-    <title>Web Mockup</title>
+    <title>Project Optima</title>
 </head>
 
 <body>
     <div class="main grey lighten-5">
-        <div id="left-area" class="white">
-            <div id="left-sidebar">
-                <div id="inputs-area">
-					<h3>Team Optima Milestone 3</h3>
+        <div id="left-area" class="left-area white">
+            <div id="left-sidebar" class="left-sidebar">
+                <div id="inputs-area" class="inputs-area animate-transform">
+                    <h3>Team Optima Milestone 3</h3>
                     <p>Noise Level:</p>
                     <div id="volume-option">
                         <p>
@@ -34,7 +34,7 @@
                         <p>
                             <label>
                                 <input name="opt-volume" type="radio" value="3" />
-                                <span>Conversation</span>
+                                <span>Conversations</span>
                             </label>
                         </p>
                         <p>
@@ -55,21 +55,20 @@
                         <p>
                             <label>
                                 <input name="opt-ppl" type="radio" value="2" />
-                                <span>Group of 
-                                    <input style="width:70px;" type="number" id="input-groupsize" placeholder="" />
+                                <span>Group of
+                                    <input style="width:70px" type="number" id="input-groupsize" placeholder="" />
                                 </span>
                             </label>
                         </p>
                     </div>
                     <div id="distance-option">
                         <p>Distance:</p>
-						<span> 
-                        <input style="width:80px;" type="number" id="input-distance" name="distance" value="0" />
-                         miles
-						</span>
+                        <span>
+                            <input style="width:80px" type="number" id="input-distance" name="distance" value="0" /> miles
+                        </span>
                     </div>
                     <div id="location-option">
-                        <p>From</p>
+                        <p>From:</p>
                         <label>
                             <p class="waves-effect waves-light btn">
                                 <input name="opt-location" type="radio" value="1" />
@@ -82,7 +81,7 @@
                                 <span>address</span>
                             </p>
                         </label>
-                        <div style="width:80%;" class="input-field">
+                        <div style="width:80%" class="input-field">
                             <input type="text" id="input-location" name="opt-address" placeholder="Enter address" />
                         </div>
                     </div>
@@ -91,7 +90,7 @@
                         <p>
                             <label>
                                 <input type="checkbox" name="extras" value="food and drink" class="filled-in" />
-                                <span>Food and Drink allowed</span>
+                                <span>Food and Drink Allowed</span>
                             </label>
                         </p>
                         <p>
@@ -107,17 +106,40 @@
                             </label>
                         </p>
                     </div>
-                    <a onclick="submitFunction()" class="waves-effect waves-light btn">
-                        Find My Space
-                    </a>
+                    <a onclick="submitQuery()" class="waves-effect waves-light btn">Find My Space</a>
+                </div>
+                <div id="result-details" class="result-details animate-transform slide-hide">
+                    <div id="result-details-toolbar" class="result-details-toolbar">
+                        <div id="result-details-close" class="result-details-close">
+                            <div class="svg-container">
+                                <svg viewBox="0 0 32 32" preserveAspectRatio="xMinYMin meet" class="svg-content">
+                                    <path d="M31.708 25.708c-0-0-0-0-0-0l-9.708-9.708 9.708-9.708c0-0 0-0 0-0 0.105-0.105 0.18-0.227 0.229-0.357 0.133-0.356 0.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13 0.048-0.252 0.124-0.357 0.228 0 0-0 0-0 0l-9.708 9.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057 0.229l-4.586 4.586c-0.286 0.286-0.361 0.702-0.229 1.057 0.049 0.13 0.124 0.252 0.229 0.357 0 0 0 0 0 0l9.708 9.708-9.708 9.708c-0 0-0 0-0 0-0.104 0.105-0.18 0.227-0.229 0.357-0.133 0.355-0.057 0.771 0.229 1.057l4.586 4.586c0.286 0.286 0.702 0.361 1.057 0.229 0.13-0.049 0.252-0.124 0.357-0.229 0-0 0-0 0-0l9.708-9.708 9.708 9.708c0 0 0 0 0 0 0.105 0.105 0.227 0.18 0.357 0.229 0.356 0.133 0.771 0.057 1.057-0.229l4.586-4.586c0.286-0.286 0.362-0.702 0.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="result-details-images">
+
+                    </div>
+                    <div id="result-details-info">
+                        <h3 id="result-details-info-name">Name</h3>
+                        <p id="result-details-info-description">lalalalala lalalalala lalalalalalalalalala lalalalala lalalalalalalalalalalalalalala lalalalala</p>
+                    </div>
+                    <div id="result-details-ratings-container">
+                        <h3>Ratings</h3>
+                        <div id="result-details-ratings-original">
+
+                        </div>
+                        <a class="waves-effect waves-light btn">Rate It!</a>
+                    </div>
                 </div>
             </div>
-            <div id="left-sidebar-tab">
-                <input type="checkbox" id="left-sidebar-tab-toggle" class="tab-toggle" hidden>
+            <div id="left-sidebar-tab" class="left-sidebar-tab">
+                <input type="checkbox" id="left-sidebar-tab-toggle" class="left-sidebar-tab-toggle" hidden>
                 <label for="left-sidebar-tab-toggle">
-                    <div id="left-sidebar-tab-icon">
+                    <div id="left-sidebar-tab-icon" class="left-sidebar-tab-icon">
                         <div class="svg-container">
-                            <svg version="1.1" id="Capa_1" viewBox="0 0 451.846 451.847" class="svg-content">
+                            <svg viewBox="0 0 451.846 451.847" preserveAspectRatio="xMinYMin meet" class="svg-content">
                                 <g>
                                     <path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
                 		L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
@@ -129,9 +151,9 @@
                 </label>
             </div>
         </div>
-        <div id="left-sidebar-tab-placeholder">
+        <div id="left-sidebar-tab-placeholder" class="left-sidebar-tab-placeholder">
         </div>
-        <div id="upper-right-area" class="white">
+        <div id="upper-right-area" class="upper-right-area">
             <!-- Google Maps -->
             <div class="google-maps">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1640.5468125052207!2d-82.83896859169491!3d34.67758644511011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88585e1135ab658d%3A0x8d3219cb792a8e56!2sClemson+University!5e0!3m2!1sen!2sus!4v1519779318854"
@@ -139,31 +161,31 @@
             </div>
             <!-- End Google Maps -->
         </div>
-        <div id="lower-right-area" class="white">
-            <div id="filter-area" class="row grey lighten-5" style="padding-top: 0.25rem">
-                <div id="sort-area" class="col s5 m5 l3">
-                    <div id="sort-select-container">
+        <div id="lower-right-area" class="lower-right-area">
+            <div id="filter-area" class="filter-area row grey lighten-5" style="padding-top: 0.25rem">
+                <div id="sort-area" class="sort-area col s5 m5 l3">
+                    <div id="sort-select-container" class="sort-select-container">
                         <div id="sort-select" class="input-field">
                             <select id="results-sort">
-                                <option value="1" selected>Distance</option>
-                                <option value="2">Amenities</option>
-                                <option value="3">Rating</option>
+                                <option value="distance" selected>Distance</option>
+                                <option value="amenities">Amenities</option>
+                                <option value="rating">Rating</option>
                             </select>
                         </div>
                         <!-- https://codepen.io/w3core/pen/DjLml -->
                     </div>
                 </div>
-                <div id="search-area" class="col s7 m7 l7 offset-l2">
+                <div id="search-area" class="search-area col s7 m7 l7 offset-l2">
                     <label for="results-search">
-                        <div id="search-icon" class="inline-block grey lighten-2">
+                        <div id="search-icon" class="search-icon inline-block grey lighten-2">
                             <div class="svg-container">
-                                <svg version="1.1" viewBox="0 0 1024 1024" preserveAspectRatio="xMinYMin meet" class="svg-content">
+                                <svg viewBox="0 0 1024 1024" preserveAspectRatio="xMinYMin meet" class="svg-content">
                                     <path d="M1015 969L732 687q100-117 100-271 0-172-122-294T416 0 122 122 0 416t122 294 294 122q154 0 271-100l282 283q10 9 23 9t23-9q9-10 9-23t-9-23zM553 740q-65 28-137 28t-137-28q-63-26-112-75T92 553q-28-65-28-137t28-137q26-63 75-112t112-75q65-28 137-28t137 28q63 26 112 75t75 112q28 65 28 137t-28 137q-26 63-75 112t-112 75z"
                                     />
                                 </svg>
                             </div>
                         </div>
-                        <div id="search-inputarea" class="inline-block input-field">
+                        <div id="search-inputarea" class="search-inputarea inline-block input-field">
                             <input type="text" id="results-search" name="search-input" placeholder="Type here to search" />
                         </div>
                     </label>
@@ -172,42 +194,44 @@
             <div id="results-status">
 
             </div>
-            <div id="results-area">
-                <!-- Sample result item
+            <div id="results-area" class="results-area">
+                <!-- Sample result item 
                 <div class="result-item grey lighten-5">
-                    <div class="result-item-section result-item-section-distance">
-                        <p>
-                            <span class="result-item-section-distance-number">1</span>mi
-                        </p>
-                    </div>
-                    <div class="vertical-divider"></div>
-                    <div class="result-item-section result-item-section-name">
-                        <p>Name</p>
-                        <p>Address</p>
-                    </div>
-                    <div class="vertical-divider"></div>
-                    <div class="result-item-section result-item-section-amenities">
-                        <div style="">1</div>
-                        <div style="">2</div>
-                        <div style="">3</div>
-                        <div style="">4</div>
-                        <div style="">5</div>
-                        <div style="">6</div>
-                        <div style="">7</div>
-                        <div style="">1</div>
-                        <div style="">2</div>
-                        <div style="">3</div>
-                        <div style="">4</div>
-                        <div style="">5</div>
-                        <div style="">6</div>
-                        <div style="">7</div>
-                    </div>
-                    <div class="vertical-divider"></div>
-                    <div class="result-item-section result-item-section-rating">
-                        <p>
-                            <span class="result-item-section-rating-number">2</span>/5&#9733;
-                        </p>
-                    </div>
+                    <label>
+                        <div class="result-item-section result-item-section-distance">
+                            <p>
+                                <span class="result-item-section-distance-number">1</span>mi
+                            </p>
+                        </div>
+                        <div class="vertical-divider"></div>
+                        <div class="result-item-section result-item-section-main">
+                            <p class="result-item-section-name">Name</p>
+                            <p>Address</p>
+                        </div>
+                        <div class="vertical-divider"></div>
+                        <div class="result-item-section result-item-section-amenities">
+                            <div style="">1</div>
+                            <div style="">2</div>
+                            <div style="">3</div>
+                            <div style="">4</div>
+                            <div style="">5</div>
+                            <div style="">6</div>
+                            <div style="">7</div>
+                            <div style="">1</div>
+                            <div style="">2</div>
+                            <div style="">3</div>
+                            <div style="">4</div>
+                            <div style="">5</div>
+                            <div style="">6</div>
+                            <div style="">7</div>
+                        </div>
+                        <div class="vertical-divider"></div>
+                        <div class="result-item-section result-item-section-rating">
+                            <p>
+                                <span class="result-item-section-rating-number">2</span>/5&#9733;
+                            </p>
+                        </div>
+                    </label>
                 </div>
                 <!-- End sample -->
             </div>
@@ -229,10 +253,6 @@
         align-* is column axis
         */
 
-        #left-sidebar {
-            padding-left: 1rem;
-        }
-
         body {
             width: 100%;
             height: 100%;
@@ -246,29 +266,72 @@
             height: 100vh;
             grid-template-columns: 3fr 7fr;
             grid-template-rows: 1fr 1fr;
-            /* justify-items: center;
-            align-items: center; */
-            place-items: stretch stretch;
+            justify-items: stretch;
+            align-items: stretch;
             justify-content: space-between;
             align-content: space-between;
         }
 
-        #left-area {
+        .left-area {
+            display: flex;
+            flex-direction: row;
             grid-column: 1;
             grid-row: span 2;
             background-color: white;
-            display: flex;
-            flex-direction: row;
         }
 
-        #left-sidebar-tab,
-        #left-sidebar-tab-placeholder {
+        .left-sidebar {
+            --slide-panel-width: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-auto-rows: 1fr;
+
+            padding-left: 1rem;
+            flex-grow: 4;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .inputs-area {
+            display: block;
+            position: relative;
+            grid-area: 1 / 1;
+        }
+
+        .inputs-area.slide-hide {
+            transform: translateX(calc(-1*var(--slide-panel-width)));
+        }
+
+        .result-details {
+            display: block;
+            grid-area: 1 / 1;
+            background-color: white;
+        }
+
+        .result-details.slide-hide {
+            transform: translateX(calc(-1*var(--slide-panel-width)));
+        }
+
+        .result-details-toolbar {
+            display: flex;
+            flex-direction: row;
+            padding: 1rem;
+        }
+
+        .result-details-close {
+            width: 36px;
+            margin-left: auto;
+            cursor: pointer;
+        }
+
+        .left-sidebar-tab,
+        .left-sidebar-tab-placeholder {
             display: none;
             width: 35px;
             height: 100%;
         }
 
-        #left-sidebar-tab-toggle+label {
+        .left-sidebar-tab-toggle+label {
             display: flex;
             width: 100%;
             height: 100%;
@@ -277,23 +340,13 @@
             cursor: pointer;
         }
 
-        #left-sidebar {
-            flex-grow: 4;
-            height: 100%;
-            overflow-y: auto;
-        }
-
-        #inputs-area {
-            position: relative;
-        }
-
-        #upper-right-area {
+        .upper-right-area {
             grid-column: 2;
             grid-row: 1;
             background-color: white;
         }
 
-        #lower-right-area {
+        .lower-right-area {
             grid-column: 2;
             grid-row: 2;
             background-color: white;
@@ -308,38 +361,44 @@
 
         @media only screen and (max-width: 600px) {
             :root {
-                --left-sidebar-width: calc(100vw - 35px);
+                --left-area-width: calc(100vw - 35px);
             }
             .main {
                 grid-template-columns: 0fr 7fr;
             }
-            #left-area {
+            .left-area {
                 position: absolute;
                 width: 100vw;
                 height: 100vh;
                 z-index: 10;
             }
-            #left-sidebar-tab {
+            .left-sidebar-tab {
                 display: block;
             }
-            #left-sidebar-tab-placeholder {
+            .left-sidebar-tab-placeholder {
                 display: block;
             }
-            .sidebar-hide {
-                transform: translateX(calc(-1*var(--left-sidebar-width)));
+            .left-area.slide-hide {
+                transform: translateX(calc(-1*var(--left-area-width)));
             }
-            .sidebar-hide svg {
+            .left-area .left-sidebar-tab-icon svg {
                 transition: transform 0.1s ease-in-out;
+            }
+            .left-area.slide-hide .left-sidebar-tab-icon svg {
                 transform: rotate(180deg);
             }
         }
 
-        .sidebar-animate-transform {
+        .animate-transform {
             transition: transform 0.2s ease-out;
         }
 
         input::placeholder {
             color: black;
+        }
+
+        .hidden {
+            display: none;
         }
 
         .inline-block {
@@ -377,36 +436,120 @@
     <script>
         var resultsSort = $('#results-sort');
         var resultsSortI = M.FormSelect.init(resultsSort, { classes: "chip select-chip" });
+        resultsSort.change(handleSortSelect);
+
+        var resultsSearch = $('#results-search');
+        resultsSearch.change(handleSearch);
+
         var leftArea = $('#left-area');
+        var leftSidebar = $('#left-sidebar');
+
+        var leftSidebarToggle = $('#left-sidebar-tab-toggle');
+        leftSidebarToggle.change(toggleLeftSidebar);
+
         var inputsDiv = $('#inputs-area');
+        var detailDiv = $('#result-details');
+
+        var detailClose = $('#result-details-close');
+        detailClose.click(closeDetailPanel);
+
+        var resultsDiv = $('#results-area');
+        var resultsArr;
+        var curResults;
+
         var chipSelect = $('.select-chip')[0];
         var chipSelectInput = $('.select-chip>input')[0];
         var chipSelectPrompt = document.createElement("p");
         chipSelectPrompt.innerHTML = "Sort&nbsp;By:";
         chipSelect.prepend(chipSelectPrompt);
         chipSelectInput.size = 20;
-        var leftSidebarToggle = $('#left-sidebar-tab-toggle');
-        leftSidebarToggle.change(toggleLeftSidebar);
+
+        var transitionEnd = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
+
         var userLatitude;
         var userLongitude;
 
-        function toggleLeftSidebar(e) {
-            leftArea.animate({ opacity: 1 }, {
-                step: function () {
-                    leftArea.addClass('sidebar-animate-transform');
-                    if (e.target.checked) {
-                        leftArea.addClass('sidebar-hide');
-                    }
-                    else {
-                        leftArea.removeClass('sidebar-hide');
-                    }
-                },
-                duration: 200,
-                complete: function () {
-                    leftArea.removeClass('sidebar-animate-transform');
-                }
-            })
+        function handleResultItemClick(evt) {
+            updateDetailPanel(this);
+            switchLeftSidebar(this);
         }
+
+        function updateDetailPanel(resultItem) {
+            var resultIdx = Array.prototype.indexOf.call(resultsDiv[0].children, resultItem);
+            var result = resultsArr[resultIdx];
+            $("#result-details-info-name").text(result.name);
+            $("#result-details-info-description").text(result.description);
+        }
+
+        function switchLeftSidebar(resultItem) {
+            var radioEl = resultItem.getElementsByTagName("input")[0];
+            radioEl.checked = !radioEl.checked;
+            var leftAreaWidth = $('#left-area').width();
+            leftArea.css("--slide-panel-width", leftAreaWidth);
+            toggleInputsArea(radioEl.checked);
+        }
+
+        function finishAnimateInputsArea() {
+            inputsDiv.removeClass("animate-transform");
+            if (inputsDiv.hasClass("slide-hide")) inputsDiv.addClass("hidden");
+        }
+
+        function finishAnimateDetailArea() {
+            detailDiv.removeClass("animate-transform");
+            if (detailDiv.hasClass("slide-hide")) detailDiv.addClass("hidden");
+        }
+
+        function toggleInputsArea(checked) {
+            if (checked === undefined) {
+                var radioEl = $('#results-area').find("input[type='radio']:checked")[0];
+                radioEl.checked = !radioEl.checked;
+                checked = radioEl.checked;
+            }
+            inputsDiv.addClass("animate-transform");
+            detailDiv.addClass("animate-transform");
+            if (checked) {
+                inputsDiv.addClass("slide-hide");
+                detailDiv.removeClass("hidden");
+                detailDiv.outerWidth();
+                detailDiv.removeClass("slide-hide");
+            }
+            else {
+                inputsDiv.removeClass("hidden");
+                inputsDiv.outerWidth();
+                inputsDiv.removeClass("slide-hide");
+                detailDiv.addClass("slide-hide");
+            }
+            inputsDiv.one(transitionEnd, finishAnimateInputsArea);
+            detailDiv.one(transitionEnd, finishAnimateDetailArea);
+        }
+
+        function closeDetailPanel(evt) {
+            toggleInputsArea();
+        }
+
+        function finishAnimateLeftSidebar(checked) {
+            leftArea.removeClass("animate-transform");
+        }
+
+        function toggleLeftSidebar(e) {
+            leftArea.addClass("animate-transform")
+            if (e.target.checked) {
+                leftArea.addClass("slide-hide");
+            }
+            else {
+                leftArea.removeClass("slide-hide");
+            }
+            leftArea.one(transitionEnd, finishAnimateLeftSidebar);
+        }
+
+        function handleSortSelect() {
+            sortSuggestions(curResults);
+        }
+
+        function handleSearch() {
+            searchSuggestions(curResults);
+        }
+
         var geo_options = {
             enableHighAccuracy: true,
             maximumAge: 30000,
@@ -416,7 +559,55 @@
             userLatitude = position.coords.latitude;
             userLongitude = position.coords.longitude;
             console.log("Position: " + userLatitude + ", " + userLongitude);
+        }
+        function submitQuery() {
+            console.log("Position: " + userLatitude + ", " + userLongitude);
 
+            var userDistance = document.getElementById("input-distance").value;
+            console.log("User distance: " + userDistance);
+
+            var userCapacity = document.getElementById("input-groupsize").value;
+            console.log("User capacity: " + userCapacity);
+
+            var userVolumeMax = $("input[name=opt-volume]:checked").val();
+
+            var query = {
+                "coords": {
+                    "longitude": userLongitude,
+                    "latitude": userLatitude
+                },
+                "distance": userDistance,
+                "capacity": userCapacity,
+                "volume": {
+                    "max": userVolumeMax,
+                    "min": "1"
+                },
+                "amenities": []
+            };
+            var amenitiesGroup = $("input[name=extras]:checked");
+            console.log(amenitiesGroup);
+            for (var i = 0; i < amenitiesGroup.length; ++i) {
+                var amenityEl = amenitiesGroup[i];
+                query.amenities.push(amenityEl.value);
+            }
+            console.log(query);
+            updateSuggestions(query);
+        }
+        function geolocationError(error) {
+            alert("Error " + error.code + ": " + error.message);
+        }
+        function updateLocation() {
+            if ("geolocation" in navigator) {
+                // geolocation is available
+                navigator.geolocation.getCurrentPosition(saveCoords, geolocationError, geo_options);
+                //saveCoords({ coords: { latitude: "34.6799357", longitude: "-82.8396752" } });
+            } else {
+                // geolocation NOT available
+                console.log("Geolocation not available");
+                alert("Geolocation not available. Try accessing from HTTPS or localhost.");
+            }
+        }
+        /*$(document).ready(function () {
             var sampleQuery = {
                 "coords": {
                     "longitude": userLongitude,
@@ -431,44 +622,7 @@
                 "amenities": ["wifi"]
             };
             updateSuggestions(sampleQuery);
-        }
-		function submitFunction(){
-			console.log("Position: " + userLatitude + ", " + userLongitude);
-		    
-			userDistance = document.getElementById("input-distance").value;
-			console.log("User distance: " + userDistance);
-			
-			userCapacity = document.getElementById("input-groupsize").value;
-			console.log("User capacity: " + userCapacity);
-			
-			var query = {
-                "coords": {
-                    "longitude": userLongitude,
-                    "latitude": userLatitude
-                },
-                "distance": userDistance,
-                "capacity": userCapacity,
-                "volume": {
-                    "max": "4",
-                    "min": "1"
-                },
-                "amenities": ["wifi"]
-            };
-			updateSuggestions(query);
-		}
-        function geolocationError(error) {
-            alert("Error " + error.code + ": " + error.message);
-        }
-        function updateLocation() {
-            if ("geolocation" in navigator) {
-                // geolocation is available
-                navigator.geolocation.getCurrentPosition(saveCoords, geolocationError, geo_options);
-            } else {
-                // geolocation NOT available
-                console.log("Geolocation not available");
-                alert("Geolocation not available. Try accessing from HTTPS or localhost.");
-            }
-        }
+        });*/
         updateLocation();
     </script>
     <script src="database-scripts.js"></script>
