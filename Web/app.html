@@ -16,57 +16,60 @@
         <div id="left-area" class="white">
             <div id="left-sidebar">
                 <div id="inputs-area">
-                    <p>Looking for space</p>
+					<h3>Team Optima Milestone 3</h3>
+                    <p>Noise Level:</p>
                     <div id="volume-option">
                         <p>
                             <label>
                                 <input name="opt-volume" type="radio" value="1" />
-                                <span>silence</span>
+                                <span>Silence</span>
                             </label>
                         </p>
                         <p>
                             <label>
                                 <input name="opt-volume" type="radio" value="2" />
-                                <span>light chatter</span>
+                                <span>Quiet</span>
                             </label>
                         </p>
                         <p>
                             <label>
                                 <input name="opt-volume" type="radio" value="3" />
-                                <span>conversations</span>
+                                <span>Conversation</span>
                             </label>
                         </p>
                         <p>
                             <label>
                                 <input name="opt-volume" type="radio" value="4" />
-                                <span>party-level</span>
+                                <span>Active</span>
                             </label>
                         </p>
                     </div>
                     <div id="group-option">
-                        <p>For</p>
+                        <p>Group Size:</p>
                         <p>
                             <label>
                                 <input name="opt-ppl" type="radio" value="1" />
-                                <span>myself</span>
+                                <span>Myself</span>
                             </label>
                         </p>
                         <p>
                             <label>
                                 <input name="opt-ppl" type="radio" value="2" />
-                                <span>a group of
-                                    <input type="number" id="input-groupsize" placeholder="" />
+                                <span>Group of 
+                                    <input style="width:70px;" type="number" id="input-groupsize" placeholder="" />
                                 </span>
                             </label>
                         </p>
                     </div>
                     <div id="distance-option">
-                        <p>Within </p>
-                        <input type="number" id="input-distance" name="distance" value="0" />
-                        <p> miles</p>
+                        <p>Distance:</p>
+						<span> 
+                        <input style="width:80px;" type="number" id="input-distance" name="distance" value="0" />
+                         miles
+						</span>
                     </div>
                     <div id="location-option">
-                        <p>Of</p>
+                        <p>From</p>
                         <label>
                             <p class="waves-effect waves-light btn">
                                 <input name="opt-location" type="radio" value="1" />
@@ -79,16 +82,16 @@
                                 <span>address</span>
                             </p>
                         </label>
-                        <div class="input-field">
-                            <input type="text" id="input-location" name="opt-address" placeholder="address" />
+                        <div style="width:80%;" class="input-field">
+                            <input type="text" id="input-location" name="opt-address" placeholder="Enter address" />
                         </div>
                     </div>
                     <div id="amenities-option">
-                        <p>With</p>
+                        <p>Amenities:</p>
                         <p>
                             <label>
                                 <input type="checkbox" name="extras" value="food and drink" class="filled-in" />
-                                <span>food and drink</span>
+                                <span>Food and Drink allowed</span>
                             </label>
                         </p>
                         <p>
@@ -100,11 +103,11 @@
                         <p>
                             <label>
                                 <input type="checkbox" name="extras" value="outlets" class="filled-in" />
-                                <span>outlets</span>
+                                <span>Electrical Outlets</span>
                             </label>
                         </p>
                     </div>
-                    <a class="waves-effect waves-light btn">
+                    <a onclick="submitFunction()" class="waves-effect waves-light btn">
                         Find My Space
                     </a>
                 </div>
@@ -429,6 +432,30 @@
             };
             updateSuggestions(sampleQuery);
         }
+		function submitFunction(){
+			console.log("Position: " + userLatitude + ", " + userLongitude);
+		    
+			userDistance = document.getElementById("input-distance").value;
+			console.log("User distance: " + userDistance);
+			
+			userCapacity = document.getElementById("input-groupsize").value;
+			console.log("User capacity: " + userCapacity);
+			
+			var query = {
+                "coords": {
+                    "longitude": userLongitude,
+                    "latitude": userLatitude
+                },
+                "distance": userDistance,
+                "capacity": userCapacity,
+                "volume": {
+                    "max": "4",
+                    "min": "1"
+                },
+                "amenities": ["wifi"]
+            };
+			updateSuggestions(query);
+		}
         function geolocationError(error) {
             alert("Error " + error.code + ": " + error.message);
         }
