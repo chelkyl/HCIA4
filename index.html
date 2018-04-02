@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="results-area.css">
     <title>Project Optima</title>
 </head>
@@ -15,7 +17,7 @@
     <div class="main grey lighten-5">
         <div id="left-area" class="left-area white">
             <div id="left-sidebar" class="left-sidebar">
-                <div id="inputs-area" class="inputs-area animate-transform">
+                <div id="inputs-area" class="inputs-area sidebar-section animate-transform">
                     <h3>Team Optima Milestone 3</h3>
                     <p>Noise Level:</p>
                     <div id="volume-option">
@@ -48,15 +50,15 @@
                         <p>Group Size:</p>
                         <p>
                             <label>
-                                <input name="opt-ppl" type="radio" value="1" />
+                                <input id="opt-group-single" name="opt-group" type="radio" value="myself" />
                                 <span>Myself</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input name="opt-ppl" type="radio" value="2" />
+                                <input id="opt-group-multiple" name="opt-group" type="radio" value="group" />
                                 <span>Group of
-                                    <input style="width:70px" type="number" id="input-groupsize" placeholder="" />
+                                    <input id="input-groupsize" type="number" name="groupsize" min="2" />
                                 </span>
                             </label>
                         </p>
@@ -64,24 +66,20 @@
                     <div id="distance-option">
                         <p>Distance:</p>
                         <span>
-                            <input style="width:80px" type="number" id="input-distance" name="distance" value="0" /> miles
+                            <input id="input-distance" type="number" name="distance" min="1" value="5" /> miles
                         </span>
                     </div>
                     <div id="location-option">
                         <p>From:</p>
-                        <label>
-                            <p class="waves-effect waves-light btn">
-                                <input name="opt-location" type="radio" value="1" />
-                                <span>my location</span>
-                            </p>
-                        </label>
-                        <label>
-                            <p class="waves-effect waves-light btn">
-                                <input name="opt-location" type="radio" value="2" />
-                                <span>address</span>
-                            </p>
-                        </label>
-                        <div style="width:80%" class="input-field">
+                        <input id="opt-location-gps" name="opt-location" type="radio" value="gps" class="hidden" />
+                        <div id="btn-location-gps" class="waves-effect waves-light btn" disabled>
+                            my location
+                        </div>
+                        <input id="opt-location-address" name="opt-location" type="radio" value="address" class="hidden" />
+                        <div id="btn-location-address" class="waves-effect waves-light btn">
+                            address
+                        </div>
+                        <div id="location-address-option" class="input-field">
                             <input type="text" id="input-location" name="opt-address" placeholder="Enter address" />
                         </div>
                     </div>
@@ -106,9 +104,9 @@
                             </label>
                         </p>
                     </div>
-                    <a onclick="submitQuery()" class="waves-effect waves-light btn">Find My Space</a>
+                    <div id="btn-submit-query" class="waves-effect waves-light btn">Find My Space</div>
                 </div>
-                <div id="result-details" class="result-details animate-transform slide-hide">
+                <div id="result-details" class="result-details sidebar-section animate-transform slide-hide">
                     <div id="result-details-toolbar" class="result-details-toolbar">
                         <div id="result-details-close" class="result-details-close">
                             <div class="svg-container">
@@ -123,14 +121,98 @@
                     </div>
                     <div id="result-details-info">
                         <h3 id="result-details-info-name">Name</h3>
-                        <p id="result-details-info-description">lalalalala lalalalala lalalalalalalalalala lalalalala lalalalalalalalalalalalalalala lalalalala</p>
+                        <p id="result-details-info-description">Description</p>
                     </div>
                     <div id="result-details-ratings-container">
                         <h3>Ratings</h3>
-                        <div id="result-details-ratings-original">
-
+                        <div id="result-details-ratings" class="result-details-ratings">
+                            <input type="checkbox" id="result-details-ratings-toggle" class="result-details-ratings-toggle" hidden>
+                            <div id="result-details-ratings-original" class="result-details-ratings-original">
+                                <span id="result-details-ratings-original-volume-prompt">Volume:</span>
+                                <p id="result-details-ratings-original-volume">
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                </p>
+                                <span id="result-details-ratings-original-comfort-prompt">Comfort:</span>
+                                <p id="result-details-ratings-original-comfort">
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                </p>
+                                <span id="result-details-ratings-original-extras-prompt">Amenities:</span>
+                                <p id="result-details-ratings-original-extras">
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                    <span class="fas fa-star"></span>
+                                </p>
+                                <a id="btn-result-details-rating-rate" class="waves-effect waves-light btn">Rate It!</a>
+                            </div>
+                            <div id="result-details-ratings-user" class="result-details-ratings-user animate-transform slide-hide hidden">
+                                <span id="result-details-ratings-user-volume-prompt">Volume:</span>
+                                <p id="result-details-ratings-user-volume" class="radio-star-group">
+                                    <input id="result-details-ratings-user-volume-5" type="radio" class="radio-star-input" name="result-details-ratings-user-volume"
+                                        value="5">
+                                    <label for="result-details-ratings-user-volume-5" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-volume-4" type="radio" class="radio-star-input" name="result-details-ratings-user-volume"
+                                        value="4">
+                                    <label for="result-details-ratings-user-volume-4" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-volume-3" type="radio" class="radio-star-input" name="result-details-ratings-user-volume"
+                                        value="3">
+                                    <label for="result-details-ratings-user-volume-3" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-volume-2" type="radio" class="radio-star-input" name="result-details-ratings-user-volume"
+                                        value="2">
+                                    <label for="result-details-ratings-user-volume-2" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-volume-1" type="radio" class="radio-star-input" name="result-details-ratings-user-volume"
+                                        value="1">
+                                    <label for="result-details-ratings-user-volume-1" class="radio-star"></label>
+                                </p>
+                                <span id="result-details-ratings-user-comfort-prompt">Comfort:</span>
+                                <p id="result-details-ratings-user-comfort" class="radio-star-group">
+                                    <input id="result-details-ratings-user-comfort-5" type="radio" class="radio-star-input" name="result-details-ratings-user-comfort"
+                                        value="5">
+                                    <label for="result-details-ratings-user-comfort-5" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-comfort-4" type="radio" class="radio-star-input" name="result-details-ratings-user-comfort"
+                                        value="4">
+                                    <label for="result-details-ratings-user-comfort-4" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-comfort-3" type="radio" class="radio-star-input" name="result-details-ratings-user-comfort"
+                                        value="3">
+                                    <label for="result-details-ratings-user-comfort-3" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-comfort-2" type="radio" class="radio-star-input" name="result-details-ratings-user-comfort"
+                                        value="2">
+                                    <label for="result-details-ratings-user-comfort-2" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-comfort-1" type="radio" class="radio-star-input" name="result-details-ratings-user-comfort"
+                                        value="1">
+                                    <label for="result-details-ratings-user-comfort-1" class="radio-star"></label>
+                                </p>
+                                <span id="result-details-ratings-user-extras-prompt">Amenities:</span>
+                                <p id="result-details-ratings-user-extras" class="radio-star-group">
+                                    <input id="result-details-ratings-user-extras-5" type="radio" class="radio-star-input" name="result-details-ratings-user-extras"
+                                        value="5">
+                                    <label for="result-details-ratings-user-extras-5" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-extras-4" type="radio" class="radio-star-input" name="result-details-ratings-user-extras"
+                                        value="4">
+                                    <label for="result-details-ratings-user-extras-4" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-extras-3" type="radio" class="radio-star-input" name="result-details-ratings-user-extras"
+                                        value="3">
+                                    <label for="result-details-ratings-user-extras-3" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-extras-2" type="radio" class="radio-star-input" name="result-details-ratings-user-extras"
+                                        value="2">
+                                    <label for="result-details-ratings-user-extras-2" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-extras-1" type="radio" class="radio-star-input" name="result-details-ratings-user-extras"
+                                        value="1">
+                                    <label for="result-details-ratings-user-extras-1" class="radio-star"></label>
+                                </p>
+                                <a id="btn-result-details-rating-submit" class="waves-effect waves-light btn">Submit!</a>
+                                <a id="btn-result-details-rating-cancel" class="waves-effect waves-light btn">Cancel</a>
+                            </div>
                         </div>
-                        <a class="waves-effect waves-light btn">Rate It!</a>
                     </div>
                 </div>
             </div>
@@ -191,13 +273,14 @@
                     </label>
                 </div>
             </div>
-            <div id="results-status">
-
+            <div id="results-status" class="results-status">
+                <p id="results-status-text" class="results-status-text"></p>
             </div>
             <div id="results-area" class="results-area">
                 <!-- Sample result item 
                 <div class="result-item grey lighten-5">
-                    <label>
+                    <input id="result-item-radio-1" type="radio" class="hidden" name="result-item-select">
+                    <div>
                         <div class="result-item-section result-item-section-distance">
                             <p>
                                 <span class="result-item-section-distance-number">1</span>mi
@@ -210,28 +293,18 @@
                         </div>
                         <div class="vertical-divider"></div>
                         <div class="result-item-section result-item-section-amenities">
-                            <div style="">1</div>
-                            <div style="">2</div>
-                            <div style="">3</div>
-                            <div style="">4</div>
-                            <div style="">5</div>
-                            <div style="">6</div>
-                            <div style="">7</div>
-                            <div style="">1</div>
-                            <div style="">2</div>
-                            <div style="">3</div>
-                            <div style="">4</div>
-                            <div style="">5</div>
-                            <div style="">6</div>
-                            <div style="">7</div>
+                            <div class="svg-container">
+                                <svg>
+                                </svg>
+                            </div>
                         </div>
                         <div class="vertical-divider"></div>
                         <div class="result-item-section result-item-section-rating">
-                            <p>
-                                <span class="result-item-section-rating-number">2</span>/5&#9733;
-                            </p>
+                            <div>
+                                <span class="result-item-section-rating-number">2</span>/5
+                            </div>
                         </div>
-                    </label>
+                    </div>
                 </div>
                 <!-- End sample -->
             </div>
@@ -239,19 +312,12 @@
     </div>
 
     <style>
-        /*
-        justify-items:
-        align-items:
-
-        justify-content:
-        align-content:
-
-        align-self:
-        justify-self:
-
-        justify-* is row axis
-        align-* is column axis
-        */
+        :root {
+            --colorClemsonOrange: #F66733;
+            --colorTextPrimary: black;
+            --colorTextSecondary: #9e9e9e;
+            --colorAccent: var(--colorClemsonOrange);
+        }
 
         body {
             width: 100%;
@@ -281,7 +347,7 @@
         }
 
         .left-sidebar {
-            --slide-panel-width: 100%;
+            --slide-panel-width: 110%;
             display: grid;
             grid-template-columns: 1fr;
             grid-auto-rows: 1fr;
@@ -292,10 +358,28 @@
             overflow-y: auto;
         }
 
+        #input-groupsize {
+            width: 4rem;
+            height: 1.5rem;
+            margin-left: 0.5rem;
+        }
+
+        #input-distance {
+            width: 4rem;
+        }
+
+        #location-address-option {
+            width: 80%;
+        }
+
         .inputs-area {
             display: block;
             position: relative;
             grid-area: 1 / 1;
+        }
+
+        .sidebar-section {
+            padding-bottom: 2rem;
         }
 
         .inputs-area.slide-hide {
@@ -312,6 +396,10 @@
             transform: translateX(calc(-1*var(--slide-panel-width)));
         }
 
+        .result-details-ratings>div.slide-hide {
+            transform: translateX(calc(-1*var(--slide-panel-width)));
+        }
+
         .result-details-toolbar {
             display: flex;
             flex-direction: row;
@@ -322,6 +410,30 @@
             width: 36px;
             margin-left: auto;
             cursor: pointer;
+        }
+
+        .result-details-ratings>div {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-auto-rows: 1fr;
+            grid-column-gap: 1rem;
+            align-items: center;
+        }
+
+        .result-details-ratings>div>span {
+            grid-column: 1;
+        }
+
+        .result-details-ratings>div>p {
+            grid-column: 2 / span 2;
+        }
+
+        .result-details-ratings>div>a.btn {
+            grid-column: 1;
+        }
+
+        .result-details-ratings>div>a.btn+a.btn {
+            grid-column: 2;
         }
 
         .left-sidebar-tab,
@@ -357,6 +469,30 @@
             .main {
                 grid-template-columns: 4fr 6fr;
             }
+
+            .result-details-ratings>div {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-auto-rows: 1fr;
+                grid-column-gap: 1rem;
+                align-items: center;
+            }
+
+            .result-details-ratings>div>span {
+                grid-column: 1;
+            }
+
+            .result-details-ratings>div>p {
+                grid-column: 2;
+            }
+
+            .result-details-ratings>div>a.btn {
+                grid-column: 1;
+            }
+
+            .result-details-ratings>div>a.btn+a.btn {
+                grid-column: 2;
+            }
         }
 
         @media only screen and (max-width: 600px) {
@@ -389,6 +525,54 @@
             }
         }
 
+        .radio-star-group {
+            direction: rtl;
+            text-align: left;
+        }
+
+        .radio-star-input {
+            display: none;
+        }
+
+        .radio-star {
+            cursor: pointer;
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            font-family: "Font Awesome 5 Free";
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .radio-star::before {
+            content: "\f005";
+        }
+
+        .radio-star-group:hover .radio-star:hover,
+        .radio-star-group:hover .radio-star:hover~.radio-star {
+            color: var(--colorAccent);
+            font-weight: 400;
+        }
+
+        .radio-star-group:active .radio-star:active,
+        .radio-star-group:active .radio-star:active~.radio-star {
+            font-weight: 900;
+        }
+
+        .radio-star-input:checked~.radio-star {
+            color: var(--colorAccent);
+        }
+
+        .radio-star-group:hover .radio-star {
+            font-weight: 900;
+        }
+
+        .fa-star.checked {
+            color: var(--colorAccent);
+        }
+
         .animate-transform {
             transition: transform 0.2s ease-out;
         }
@@ -397,12 +581,68 @@
             color: black;
         }
 
+        input[type="radio"]:checked+.btn {
+            color: #fafafa;
+            background-color: var(--colorAccent);
+        }
+
+        input[type="radio"]:checked+span,
+        input[type="checkbox"].filled-in:checked+span:not(.lever) {
+            color: var(--colorAccent);
+        }
+
+        input[type="radio"]:checked+span::after,
+        input[type="checkbox"].filled-in:checked+span:not(.lever)::after {
+            border-color: var(--colorAccent);
+            background-color: var(--colorAccent);
+        }
+
+        input:not([type]):focus:not([readonly]),
+        input[type=text]:not(.browser-default):focus:not([readonly]),
+        input[type=password]:not(.browser-default):focus:not([readonly]),
+        input[type=email]:not(.browser-default):focus:not([readonly]),
+        input[type=url]:not(.browser-default):focus:not([readonly]),
+        input[type=time]:not(.browser-default):focus:not([readonly]),
+        input[type=date]:not(.browser-default):focus:not([readonly]),
+        input[type=datetime]:not(.browser-default):focus:not([readonly]),
+        input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+        input[type=tel]:not(.browser-default):focus:not([readonly]),
+        input[type=number]:not(.browser-default):focus:not([readonly]),
+        input[type=search]:not(.browser-default):focus:not([readonly]),
+        textarea.materialize-textarea:focus:not([readonly]) {
+            border-bottom-color: var(--colorAccent);
+            box-shadow: unset;
+        }
+
+        .select-wrapper>ul>li>span {
+            color: var(--colorAccent);
+        }
+
+        .btn:not([disabled]) {
+            background-color: #eceff1;
+            border: 1px solid var(--colorAccent);
+        }
+
+        .btn {
+            color: var(--colorAccent);
+        }
+
+        .btn[disabled] {
+            color: #9e9e9e;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            color: #fafafa;
+            background-color: var(--colorAccent);
+        }
+
         .hidden {
-            display: none;
+            display: none !important;
         }
 
         .inline-block {
-            display: inline-block;
+            display: inline-block !important;
         }
 
         .svg-container {
@@ -434,57 +674,201 @@
     </style>
 
     <script>
-        var resultsSort = $('#results-sort');
-        var resultsSortI = M.FormSelect.init(resultsSort, { classes: "chip select-chip" });
-        resultsSort.change(handleSortSelect);
-
-        var resultsSearch = $('#results-search');
-        resultsSearch.change(handleSearch);
-
-        var leftArea = $('#left-area');
-        var leftSidebar = $('#left-sidebar');
-
-        var leftSidebarToggle = $('#left-sidebar-tab-toggle');
+        let leftArea = $('#left-area');
+        let leftSidebar = $('#left-sidebar');
+        let leftSidebarTab = $('#left-sidebar-tab');
+        leftSidebarTab.click((e) => {
+            let selectedResult = $(".result-item>input[type=radio]:checked");
+            if (selectedResult.length != 0)
+                selectedResult[0].checked = false;
+        });
+        let leftSidebarToggle = $('#left-sidebar-tab-toggle');
         leftSidebarToggle.change(toggleLeftSidebar);
 
-        var inputsDiv = $('#inputs-area');
-        var detailDiv = $('#result-details');
+        let inputsDiv = $('#inputs-area');
+        let inputVolumeOpt = $("input[name=opt-volume]");
+        let inputGroupOpt = $("input[name=opt-group]");
+        let inputGroupOptMultiple = $("#opt-group-multiple");
+        inputGroupOptMultiple.click((e) => {
+            inputGroupSize.focus();
+        });
+        let inputGroupSize = $("#input-groupsize");
+        let inputDistance = $("#input-distance");
+        let inputLocationOpt = $("input[name=opt-location]");
+        let buttonLocationGPS = $("#btn-location-gps");
+        buttonLocationGPS.click((e) => {
+            $("#opt-location-gps").click();
+            inputLocation.val(userCoords.latitude + ", " + userCoords.longitude);
+        });
+        let buttonLocationAddress = $("#btn-location-address");
+        buttonLocationAddress.click((e) => {
+            $("#opt-location-address").click();
+            inputLocation.focus();
+            inputLocation[0].setSelectionRange(0, inputLocation.val().length);
+        });
+        let inputLocation = $("#input-location");
+        inputLocation.click((e) => {
+            inputLocation[0].setSelectionRange(0, inputLocation.val().length);
+        });
+        let inputAmenitiesOpt = $("input[name=extras]");
+        let buttonSendQuery = $("#btn-submit-query");
+        buttonSendQuery.click((e) => {
+            submitQuery();
+            leftSidebarToggle.click();
+        });
 
-        var detailClose = $('#result-details-close');
+        let detailDiv = $('#result-details');
+        let detailClose = $('#result-details-close');
         detailClose.click(closeDetailPanel);
+        let ratingsOriginalDiv = $('#result-details-ratings-original');
+        let ratingsUserDiv = $('#result-details-ratings-user');
+        let ratingUserToggle = $('#result-details-ratings');
+        let btnRate = $('#btn-result-details-rating-rate');
+        btnRate.click((e) => {
+            toggleUserRating(true);
+        });
+        let btnRateSubmit = $('#btn-result-details-rating-submit');
+        btnRateSubmit.click(submitUserRating);
+        let btnRateCancel = $('#btn-result-details-rating-cancel');
+        btnRateCancel.click(cancelUserRating);
 
-        var resultsDiv = $('#results-area');
-        var resultsArr;
-        var curResults;
+        let resultsDiv = $('#results-area');
+        let resultsSort = $('#results-sort');
+        let resultsSortI = M.FormSelect.init(resultsSort, { classes: "chip select-chip" });
+        resultsSort.change(handleSearchAndSort);
+        let resultsSearch = $('#results-search');
+        resultsSearch.change(handleSearchAndSort);
+        let resultsStatusDiv = $('#results-status');
+        let resultsStatusText = $('#results-status-text');
+        resultsStatusDiv.hide();
 
-        var chipSelect = $('.select-chip')[0];
-        var chipSelectInput = $('.select-chip>input')[0];
-        var chipSelectPrompt = document.createElement("p");
+        let resultsArr;
+        let curResults;
+
+        let chipSelect = $('.select-chip');
+        let chipSelectInput = $('.select-chip>input');
+        let chipSelectPrompt = document.createElement("span");
         chipSelectPrompt.innerHTML = "Sort&nbsp;By:";
-        chipSelect.prepend(chipSelectPrompt);
-        chipSelectInput.size = 20;
+        let chipSelectLabel = document.createElement("label");
+        chipSelectLabel.style.height = "100%";
+        //chipSelect.prepend(chipSelectPrompt);
+        chipSelectInput.wrap(chipSelectLabel);
+        chipSelectInput.before(chipSelectPrompt);
+        //chipSelectInput.css("flex-grow", "1");
 
-        var transitionEnd = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
+        const transitionEnd = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
 
-        var userLatitude;
-        var userLongitude;
+        const ratingsArr = ["volume", "comfort", "extras"];
+
+        let userCoords = {
+            "latitude": undefined,
+            "longitude": undefined
+        };
+        let geolocationWatchId;
+        let geolocationSeenFirstError = false;
 
         function handleResultItemClick(evt) {
             updateDetailPanel(this);
             switchLeftSidebar(this);
+            leftSidebarToggle.prop("checked", false);
+            toggleLeftSidebar(false);
+            //leftSidebarToggle.click();
+        }
+
+        function finishAnimateRatingsOriginal() {
+            ratingsOriginalDiv.removeClass("animate-transform");
+            if (ratingsOriginalDiv.hasClass("slide-hide")) ratingsOriginalDiv.addClass("hidden");
+            ratingsUserDiv.removeClass("hidden");
+            ratingsUserDiv.outerWidth();
+            ratingsUserDiv.removeClass("slide-hide");
+            $(this).off();
+        }
+
+        function finishAnimateRatingsUser() {
+            ratingsUserDiv.removeClass("animate-transform");
+            if (ratingsUserDiv.hasClass("slide-hide")) ratingsUserDiv.addClass("hidden");
+            ratingsOriginalDiv.removeClass("hidden");
+            ratingsOriginalDiv.outerWidth();
+            ratingsOriginalDiv.removeClass("slide-hide");
+            $(this).off();
+        }
+
+        function toggleUserRating(e) {
+            ratingsOriginalDiv.addClass("animate-transform");
+            ratingsUserDiv.addClass("animate-transform");
+            if (e == true || (e.target && e.target.checked)) {
+                ratingsOriginalDiv.addClass("slide-hide");
+                ratingUserToggle[0].checked = true;
+                ratingsOriginalDiv.one(transitionEnd, finishAnimateRatingsOriginal);
+            }
+            else {
+                ratingsUserDiv.addClass("slide-hide");
+                ratingUserToggle[0].checked = false;
+                ratingsUserDiv.one(transitionEnd, finishAnimateRatingsUser);
+            }
+        }
+
+        function cancelUserRating(e) {
+            ratingsUserDiv.find("input[type='radio']:checked").each((idx, el) => {
+                el.checked = false;
+            });
+            toggleUserRating(false);
+        }
+
+        function submitUserRating(e) {
+            let selectedRadioEl = $('#results-area').find("input[type='radio']:checked");
+            if (selectedRadioEl.length != 0) {
+                let resultItem = selectedRadioEl.parent();
+                let resultIdx = Array.prototype.indexOf.call(resultsDiv[0].children, resultItem[0]);
+                let result = resultsArr[resultIdx];
+                let userId = 0;
+                let userRatings = {};
+                for (let i = 0; i < ratingsArr.length; ++i) {
+                    let ratingName = ratingsArr[i];
+                    let selectedRadioStar = ratingsUserDiv.find("input[type='radio'][name='result-details-ratings-user-" + ratingName + "']:checked");
+                    if (selectedRadioStar.length != 0) {
+                        userRatings[ratingName] = selectedRadioStar.val();
+                    }
+                    else {
+                        userRatings[ratingName] = 0;
+                    }
+                }
+                result.ratings.community[userId] = userRatings;
+                updateDisplayedRating(result);
+            }
+            toggleUserRating(false);
+        }
+
+        function updateDisplayedRating(result) {
+            let userId = 0;
+            let ratings = result.ratings.community[userId];
+            if (ratings == undefined) ratings = result.ratings.original;
+            for (let i = 0; i < ratingsArr.length; ++i) {
+                let ratingName = ratingsArr[i];
+                let ratingItemStars = $("#result-details-ratings-original-" + ratingName + ">span");
+                let n;
+                for (n = 0; n < ratings[ratingName]; ++n) {
+                    ratingItemStars[n].classList.add("checked");
+                }
+                for (; n < 5; ++n) {
+                    ratingItemStars[n].classList.remove("checked");
+                }
+            }
         }
 
         function updateDetailPanel(resultItem) {
-            var resultIdx = Array.prototype.indexOf.call(resultsDiv[0].children, resultItem);
-            var result = resultsArr[resultIdx];
+            let resultIdx = Array.prototype.indexOf.call(resultsDiv[0].children, resultItem);
+            let result = resultsArr[resultIdx];
             $("#result-details-info-name").text(result.name);
             $("#result-details-info-description").text(result.description);
+            updateDisplayedRating(result);
+            //!!TODO: add images
         }
 
         function switchLeftSidebar(resultItem) {
-            var radioEl = resultItem.getElementsByTagName("input")[0];
+            let radioEl = resultItem.getElementsByTagName("input")[0];
             radioEl.checked = !radioEl.checked;
-            var leftAreaWidth = $('#left-area').width();
+            let leftAreaWidth = $('#left-area').width();
             leftArea.css("--slide-panel-width", leftAreaWidth);
             toggleInputsArea(radioEl.checked);
         }
@@ -501,9 +885,12 @@
 
         function toggleInputsArea(checked) {
             if (checked === undefined) {
-                var radioEl = $('#results-area').find("input[type='radio']:checked")[0];
-                radioEl.checked = !radioEl.checked;
-                checked = radioEl.checked;
+                let selectedRadioEl = $('#results-area').find("input[type='radio']:checked");
+                if (selectedRadioEl.length != 0) {
+                    let radioEl = selectedRadioEl[0];
+                    radioEl.checked = !radioEl.checked;
+                    checked = radioEl.checked;
+                }
             }
             inputsDiv.addClass("animate-transform");
             detailDiv.addClass("animate-transform");
@@ -521,6 +908,7 @@
             }
             inputsDiv.one(transitionEnd, finishAnimateInputsArea);
             detailDiv.one(transitionEnd, finishAnimateDetailArea);
+            if (ratingUserToggle[0].checked) toggleUserRating(false);
         }
 
         function closeDetailPanel(evt) {
@@ -532,8 +920,8 @@
         }
 
         function toggleLeftSidebar(e) {
-            leftArea.addClass("animate-transform")
-            if (e.target.checked) {
+            leftArea.addClass("animate-transform");
+            if (e == true || (e.target && e.target.checked)) {
                 leftArea.addClass("slide-hide");
             }
             else {
@@ -542,77 +930,117 @@
             leftArea.one(transitionEnd, finishAnimateLeftSidebar);
         }
 
-        function handleSortSelect() {
-            sortSuggestions(curResults);
-        }
-
-        function handleSearch() {
+        function handleSearchAndSort() {
             searchSuggestions(curResults);
         }
-
-        var geo_options = {
-            enableHighAccuracy: true,
-            maximumAge: 30000,
-            timeout: 30000
-        };
-        function saveCoords(position) {
-            userLatitude = position.coords.latitude;
-            userLongitude = position.coords.longitude;
-            console.log("Position: " + userLatitude + ", " + userLongitude);
-        }
         function submitQuery() {
-            console.log("Position: " + userLatitude + ", " + userLongitude);
+            let selectedVolumeOpt = inputVolumeOpt.filter(":checked");
+            let userVolumeMax = selectedVolumeOpt.val();
+            let userVolumeMin = 1;
+            if (!userVolumeMax || userVolumeMax > 4) userVolumeMax = "4";
+            else if (userVolumeMax < 1) userVolumeMax = "1";
+            console.log("User max volume: " + userVolumeMax);
 
-            var userDistance = document.getElementById("input-distance").value;
-            console.log("User distance: " + userDistance);
-
-            var userCapacity = document.getElementById("input-groupsize").value;
+            let selectedGroupOption = inputGroupOpt.filter(":checked");
+            let userCapacity = "1";
+            if (selectedGroupOption.val() === "myself") userCapacity = "1";
+            else {
+                userCapacity = inputGroupSize.val();
+                if (userCapacity < 1) userCapacity = 1;
+            }
             console.log("User capacity: " + userCapacity);
 
-            var userVolumeMax = $("input[name=opt-volume]:checked").val();
+            let userDistance = inputDistance.val();
+            if (userDistance < 1) userDistance = 1;
+            console.log("User distance: " + userDistance);
 
-            var query = {
-                "coords": {
-                    "longitude": userLongitude,
-                    "latitude": userLatitude
-                },
+            let userCoords;
+            let selectedLocationOption = inputLocationOpt.filter(":checked");
+            if (selectedLocationOption.val() == "address") {
+                //https://developers.google.com/maps/documentation/geocoding/intro
+                userCoords = getCoords();
+            }
+            else userCoords = getCoords();
+            console.log("User coordinates: " + JSON.stringify(userCoords));
+
+            let userAmenities = [];
+            let selectedAmenities = inputAmenitiesOpt.filter(":checked");
+            selectedAmenities.each((idx, amenityEl) => userAmenities.push(amenityEl.value));
+            console.log("User amenities: " + JSON.stringify(userAmenities));
+
+            let query = {
+                "coords": getCoords(),
                 "distance": userDistance,
                 "capacity": userCapacity,
                 "volume": {
                     "max": userVolumeMax,
-                    "min": "1"
+                    "min": userVolumeMin
                 },
-                "amenities": []
+                "amenities": userAmenities
             };
-            var amenitiesGroup = $("input[name=extras]:checked");
-            console.log(amenitiesGroup);
-            for (var i = 0; i < amenitiesGroup.length; ++i) {
-                var amenityEl = amenitiesGroup[i];
-                query.amenities.push(amenityEl.value);
-            }
-            console.log(query);
+            console.log("User query: " + JSON.stringify(query));
             updateSuggestions(query);
         }
-        function geolocationError(error) {
-            alert("Error " + error.code + ": " + error.message);
+        function getCoords() {
+            return {
+                "latitude": userCoords.latitude,
+                "longitude": userCoords.longitude
+            };
         }
-        function updateLocation() {
+        function saveCoords(position) {
+            buttonLocationGPS.removeAttr("disabled");
+            userCoords = position.coords;
+            let positionStatus = "Position: " + userCoords.latitude + ", " + userCoords.longitude
+                + "\nAccuracy: " + userCoords.accuracy + "m";
+            console.log(positionStatus);
+        }
+        function handleGeolocationError(error) {
+            if (geolocationSeenFirstError === false) {
+                if (error.code === error.PERMISSION_DENIED) {
+                    let response = confirm("Uh oh, I need permission to get your location.\nOtherwise, the option will be unavailable. Should I keep trying?");
+                    if (response) watchGeolocation();
+                }
+                else {
+                    let errorMessage = "";
+                    switch (error.code) {
+                        case error.POSITION_UNAVAILABLE:
+                            errorMessage = "Uh oh, I couldn't get your location.";
+                            break;
+                        case error.TIMEOUT:
+                            errorMessage = "Uh oh, geolocation timed out while getting location.";
+                            break;
+                    }
+                    errorMessage += "\nI will keep trying but the option will be unavailable until I am successful.";
+                    alert(errorMessage);
+                }
+                geolocationSeenFirstError = true;
+            }
+            console.log("Error " + error.code + ": " + error.message);
+        }
+        function watchGeolocation() {
+            const geo_options = {
+                enableHighAccuracy: true,
+                maximumAge: 1000 * 15,
+                timeout: 1000 * 60
+            };
+            geolocationWatchId = navigator.geolocation.watchPosition(saveCoords, handleGeolocationError, geo_options);
+        }
+        function initGeolocation() {
             if ("geolocation" in navigator) {
                 // geolocation is available
-                navigator.geolocation.getCurrentPosition(saveCoords, geolocationError, geo_options);
-                //saveCoords({ coords: { latitude: "34.6799357", longitude: "-82.8396752" } });
+                watchGeolocation();
             } else {
                 // geolocation NOT available
+                alert("Geolocation not available. I won't be able to get your coordinates.");
                 console.log("Geolocation not available");
-                alert("Geolocation not available. Try accessing from HTTPS or localhost.");
             }
         }
-        /*$(document).ready(function () {
-            var sampleQuery = {
-                "coords": {
-                    "longitude": userLongitude,
-                    "latitude": userLatitude
-                },
+        initGeolocation();
+
+         /*
+        $(document).ready(function () {
+            const sampleQuery = {
+                "coords": { latitude: "34.6799357", longitude: "-82.8396752" },
                 "distance": "10",
                 "capacity": "1",
                 "volume": {
@@ -622,8 +1050,7 @@
                 "amenities": ["wifi"]
             };
             updateSuggestions(sampleQuery);
-        });*/
-        updateLocation();
+        });//*/
     </script>
     <script src="database-scripts.js"></script>
     <script src="results-scripts.js"></script>

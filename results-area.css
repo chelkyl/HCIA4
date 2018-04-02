@@ -16,23 +16,22 @@
     display: inline-block;
 }
 
-.select-chip {
+.sort-select-container.input-field {
+    margin-top: 0.7rem;
+}
+
+.select-chip>label {
     display: flex;
     flex: auto;
     flex-direction: row;
     align-items: center;
 }
 
-.select-chip span {
-    flex-basis: 0;
-}
-
 .select-chip input.select-dropdown {
-    width: 100%;
+    width: 82%;
     border: none;
     margin: 0;
     margin-left: 0.5rem;
-    margin-right: 0.2rem;
 }
 
 .select-chip input.select-dropdown:focus {
@@ -73,6 +72,16 @@
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     overflow: auto;
+}
+
+.results-status {
+    text-align: center;
+}
+
+.results-status.error {
+    background-color: white;
+    border: 1px solid tomato;
+    color: tomato;
 }
 
 .result-item {

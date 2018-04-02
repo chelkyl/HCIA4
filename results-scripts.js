@@ -118,7 +118,7 @@ function addResultItem(result, resultsArea) {
     var rateNum = document.createElement("span");
     rateNum.classList.add("result-item-section-rating-number");
     rateNum.innerHTML = result.ratings.averages.overall.toFixed(1);
-    rateText.innerHTML = "/5&#9733;";
+    rateText.innerHTML = "/5";
     rateText.insertAdjacentElement("afterbegin", rateNum);
     rateSect.appendChild(rateText);
 
@@ -139,9 +139,13 @@ function addResultItem(result, resultsArea) {
 }
 
 function addResultItems(resultsList, resultsArea) {
-    console.log(resultsList);
-    for (var i = 0; i < resultsList.length && i < resultsPerPage; ++i) {
-        addResultItem(resultsList[i], resultsArea);
+    if (resultsList.length == 0) {
+
+    }
+    else {
+        for (var i = 0; i < resultsList.length && i < resultsPerPage; ++i) {
+            addResultItem(resultsList[i], resultsArea);
+        }
     }
 }
 
@@ -302,7 +306,6 @@ function sortByAmenities(buildingObjA, buildingObjB) {
     var Acount = 0;
     var Bcount = 0;
     for (var amenity in buildingObjA.amenities) {
-        console.log(amenity);
         if (buildingObjA.amenities[amenity] == 1) Acount++;
     }
     for (var amenity in buildingObjB.amenities) {
@@ -345,16 +348,29 @@ var queryModel = {
     "amenities": ["amenity names"]
 };
 
+function showResultsStatus(show, status, isError) {
+    if (show) {
+        resultsStatusText.text(status);
+        if (isError) resultsStatusDiv.addClass("error");
+        else resultsStatusDiv.removeClass("error");
+        resultsStatusDiv.show("slow");
+    }
+    else {
+        resultsStatusDiv.removeClass("error");
+        resultsStatusDiv.hide("fast");
+    }
+}
+
 function updateSuggestions(query) {
     clearResultItems();
     var data = getDBData();
     console.log("Data retrieved: " + data.length);
     var results = searchData(query, data);
     if (results.length == 0) {
-        $('#results-status').addClass("results-status-visible");
+        showResultsStatus(true, "No results found, try again with different options.", true);
         return;
     }
-    $('#results-status').removeClass("results-status-visible");
+    showResultsStatus(false);
     curResults = results;
     console.log("Results found: " + results.length);
     var sortType = $('#results-sort').val();
@@ -385,18 +401,25 @@ function sortSuggestions(results) {
 }
 
 function searchSuggestions(results) {
-    var searchTerm = $('#results-search').val();
+    clearResultItems();
+    var searchTerm = $('#results-search').val().toLowerCase();
     var searchedResults = results.filter(resultItem => {
-        if (resultItem.name.includes(searchTerm)) return true;
-        if (resultItem.description.includes(searchTerm)) return true;
+        if (resultItem.name.toLowerCase().includes(searchTerm)) return true;
+        if (resultItem.description.toLowerCase().includes(searchTerm)) return true;
         for (var amenity in resultItem.amenities) {
-            if (amenity.includes(searchTerm) && resultItem.amenities[amenity] == 1) return true;
+            if (amenity.toLowerCase().includes(searchTerm) && resultItem.amenities[amenity] == 1) return true;
         }
-        if (resultItem.address.includes(searchTerm)) return true;
+        if (resultItem.address.toLowerCase().includes(searchTerm)) return true;
         if (resultItem.distance.feet.toString().includes(searchTerm)) return true;
         if (resultItem.distance.miles.toString().includes(searchTerm)) return true;
         if (resultItem.ratings.averages.overall.toString().includes(searchTerm)) return true;
         return false;
     });
-    sortSuggestions(searchedResults);
+    if (searchedResults.length == 0) {
+        showResultsStatus(true, "No results found for search terms. Please try alternative terms.", true);
+    }
+    else {
+        showResultsStatus(false);
+        sortSuggestions(searchedResults);
+    }
 }
