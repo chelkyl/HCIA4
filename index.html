@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="assets/css/results-area.css">
     <title>Project Optima</title>
 </head>
@@ -245,8 +243,6 @@
         <div id="upper-right-area" class="upper-right-area">
             <!-- Google Maps -->
             <div class="google-maps">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1640.5468125052207!2d-82.83896859169491!3d34.67758644511011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88585e1135ab658d%3A0x8d3219cb792a8e56!2sClemson+University!5e0!3m2!1sen!2sus!4v1519779318854"
-                    width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
             </div>
             <!-- End Google Maps -->
         </div>
@@ -792,6 +788,9 @@
         }
     </style>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApqJNlgAOhhTF4zqTwfSe0IuRtfxoM_dM&callback=initMap"></script>-->
     <script>
         let leftArea = $('#left-area');
         let leftSidebar = $('#left-sidebar');
@@ -1200,8 +1199,9 @@
 
         // /*
         $(document).ready(function () {
+            userCoords = { latitude: "34.6799357", longitude: "-82.8396752" };
             const sampleQuery = {
-                "coords": { latitude: "34.6799357", longitude: "-82.8396752" },
+                "coords": getCoords(),
                 "distance": "50",
                 "capacity": "1",
                 "volume": {
