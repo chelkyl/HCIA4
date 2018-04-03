@@ -1,10 +1,16 @@
-var resultsPerPage = 10;
+var resultsPerPage = 20;
 
 var amenitySVGs = {
     "food and drink": '<svg viewBox="0 0 540.201 540.201" preserveAspectRatio="xMinYMin meet" class="svg-content"><g><g><path d="M169.467,194.102v310.136c0,8.086,2.95,15.08,8.862,20.986c5.808,5.809,12.681,8.732,20.6,8.824c7.914-0.092,14.792-3.016,20.606-8.824c5.906-5.906,8.855-12.9,8.855-20.986V194.102c8.862-3.103,42.081-32.711,42.081-42.204V27.161c0-4.033-1.481-7.534-4.431-10.49c-2.956-2.95-6.457-4.431-10.49-4.431c-4.045,0-7.54,1.481-10.49,4.431c-2.956,2.962-4.431,6.457-4.431,10.49v96.99c0,4.045-1.481,7.54-4.431,10.49c-2.956,2.956-6.451,4.425-10.49,4.425c-4.045,0-7.54-1.469-10.49-4.425c-2.95-2.95-4.431-6.451-4.431-10.49v-96.99c0-4.033-1.481-7.534-4.431-10.49c-2.95-2.95-6.45-4.431-10.489-4.431c-4.045,0-7.54,1.481-10.49,4.431c-2.956,2.962-4.431,6.457-4.431,10.49v96.99c0,4.045-1.481,7.54-4.431,10.49c-2.956,2.956-6.451,4.425-10.49,4.425c-4.045,0-7.54-1.469-10.49-4.425c-2.956-2.95-4.431-6.451-4.431-10.49v-96.99c0-4.033-1.475-7.534-4.431-10.49c-2.95-2.95-6.45-4.431-10.49-4.431c-4.045,0-7.54,1.481-10.489,4.431c-2.95,2.962-4.431,6.457-4.431,10.49v124.732C121.266,161.384,160.605,190.993,169.467,194.102z"/><path d="M199.308,534.08c-0.129,0-0.251-0.037-0.38-0.037c-0.128,0-0.245,0.037-0.379,0.037H199.308z"/><path d="M389.848,540.201c-0.129,0-0.25-0.037-0.379-0.037s-0.252,0.037-0.379,0.037H389.848z"/><path d="M326.139,268.588h33.869v241.771c0,8.084,2.949,15.08,8.855,20.984c5.812,5.809,12.686,8.734,20.605,8.826c7.912-0.092,14.791-3.018,20.605-8.826c5.906-5.904,8.861-12.9,8.861-20.984V14.921c0-4.033-1.48-7.534-4.43-10.49C411.549,1.481,408.055,0,404.016,0h-10.723c-20.52,0-38.084,7.308-52.693,21.916c-14.607,14.614-21.914,32.179-21.914,52.693v186.52c0,2.02,0.74,3.77,2.215,5.245C322.369,267.848,324.119,268.588,326.139,268.588z"/></g></g></svg>',
     "outlets": '<svg viewBox="0 0 435.747 435.746" preserveAspectRatio="xMinYMin meet" class="svg-content"><g><path d="M336.387,131.431v172.872c0,14.188-11.504,25.698-25.698,25.698c-14.189,0-25.696-11.51-25.696-25.698v-7.584c-2.287,0.346-4.616,0.579-7.002,0.579h-79.91c-25.802,0-46.72-20.913-46.72-46.72v-10.747h-20.049c-9.086,0-12.742-4.881-14.192-12.142H0v-27.883h117.699c1.758-5.957,5.54-9.812,13.613-9.812h20.049v-4.829c0-25.798,20.917-46.72,46.72-46.72h79.91c2.386,0,4.715,0.241,7.002,0.583v-7.587c0-14.188,11.507-25.697,25.696-25.697C324.883,105.745,336.387,117.242,336.387,131.431z M435.747,169.896c0-10.063-8.165-18.222-18.223-18.222h-73.193v36.443h73.193C427.582,188.118,435.747,179.965,435.747,169.896z M417.524,246.371h-73.193v36.443h73.193c10.058,0,18.223-8.16,18.223-18.223S427.582,246.371,417.524,246.371z"/></g></svg>',
     "wifi": '<svg viewBox="0 0 26 26" preserveAspectRatio="xMinYMin meet" class="svg-content"><g><path d="M25.7,8.3C22.4,5,18,3,13,3S3.5,5,0.3,8.3C0.1,8.5,0,8.7,0,9c0,0.3,0.1,0.5,0.3,0.7l1.4,1.4c0.4,0.4,1,0.4,1.4,0   C5.6,8.6,9.1,7,13,7s7.4,1.6,9.9,4.1c0.4,0.4,1,0.4,1.4,0l1.4-1.4C25.9,9.5,26,9.3,26,9S25.9,8.4,25.7,8.3z"/><path d="m13,11c-2.8,0-5.2,1.1-7,2.9-0.4,0.4-0.4,1 0,1.4l1.4,1.4c0.4,0.4 1,0.4 1.4,0 1.1-1.1 2.6-1.7 4.2-1.7 1.6,0 3.1,0.7 4.2,1.7 0.4,0.4 1,0.4 1.4,0l1.4-1.4c0.4-0.4 0.4-1 0-1.4-1.8-1.8-4.2-2.9-7-2.9z"/><circle cx="13" cy="21" r="2"/></g></svg>'
 };
+
+var amenityIconNames = {
+    "food and drink": "icon-spoon-knife",
+    "outlets": "icon-power-cord",
+    "wifi": "icon-connection"
+}
 
 function getAmenityOrder() {
     return [
@@ -19,6 +25,7 @@ class ResultItem {
         this.building = item;
         this.name = this.building.name;
         this.description = this.building.description;
+        this.images = this.building.images;
         this.amenities = this.building.amenities;
         this.location = this.building.location;
         this.address = this.building.location.address;
@@ -101,10 +108,7 @@ function addResultItem(result, resultsArea) {
         var amenity = amenityOrder[i];
         if (result.amenities[amenity] == 1) {
             var amenEl = document.createElement("div");
-            var svgCont = document.createElement("div");
-            svgCont.classList.add("svg-container");
-            svgCont.innerHTML = amenitySVGs[amenity];
-            amenEl.appendChild(svgCont);
+            amenEl.classList.add(amenityIconNames[amenity]);
             amenSect.appendChild(amenEl);
         }
     }
@@ -139,13 +143,8 @@ function addResultItem(result, resultsArea) {
 }
 
 function addResultItems(resultsList, resultsArea) {
-    if (resultsList.length == 0) {
-
-    }
-    else {
-        for (var i = 0; i < resultsList.length && i < resultsPerPage; ++i) {
-            addResultItem(resultsList[i], resultsArea);
-        }
+    for (var i = 0; i < resultsList.length && i < resultsPerPage; ++i) {
+        addResultItem(resultsList[i], resultsArea);
     }
 }
 
@@ -217,8 +216,11 @@ function filterRoomsByCapacity(capacity, rooms) {
 
 function filterBuildingsByCapacity(capacity, data) {
     var reducedData = data.reduce(function (filtered, resultItem) {
-        resultItem.rooms = filterRoomsByCapacity(capacity, resultItem.rooms);
-        if (resultItem.rooms.length > 0) filtered.push(resultItem);
+        if (resultItem.rooms.length != 0) {
+            resultItem.rooms = filterRoomsByCapacity(capacity, resultItem.rooms);
+            if (resultItem.rooms.length > 0) filtered.push(resultItem);
+        }
+        else filtered.push(resultItem);
         return filtered;
     }, []);
     return reducedData;
@@ -227,7 +229,7 @@ function filterBuildingsByCapacity(capacity, data) {
 function filterBuildingsByVolumeRating(volumeRange, data) {
     var reducedData = data.reduce(function (filtered, resultItem) {
         if (resultItem.ratings.averages.volume <= volumeRange.max &&
-            resultItem.ratings.averages.volume > volumeRange.min) {
+            resultItem.ratings.averages.volume >= volumeRange.min) {
             filtered.push(resultItem);
         }
         return filtered;

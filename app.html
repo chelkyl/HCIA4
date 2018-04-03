@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1"
-        crossorigin="anonymous">
-    <link rel="stylesheet" href="results-area.css">
+    <link rel="stylesheet" href="assets/css/results-area.css">
     <title>Project Optima</title>
 </head>
 
@@ -74,13 +72,14 @@
                         <input id="opt-location-gps" name="opt-location" type="radio" value="gps" class="hidden" />
                         <div id="btn-location-gps" class="waves-effect waves-light btn" disabled>
                             my location
+                            <span id="btn-location-gps-status"></span>
                         </div>
                         <input id="opt-location-address" name="opt-location" type="radio" value="address" class="hidden" />
                         <div id="btn-location-address" class="waves-effect waves-light btn">
                             address
                         </div>
                         <div id="location-address-option" class="input-field">
-                            <input type="text" id="input-location" name="opt-address" placeholder="Enter address" />
+                            <input type="text" id="input-location" name="opt-address" placeholder="Your Location" readonly/>
                         </div>
                     </div>
                     <div id="amenities-option">
@@ -116,8 +115,9 @@
                             </div>
                         </div>
                     </div>
-                    <div id="result-details-images">
-
+                    <div id="result-details-images" class="result-details-images">
+                        <ul id="result-details-images-container" class="result-details-images-container">
+                        </ul>
                     </div>
                     <div id="result-details-info">
                         <h3 id="result-details-info-name">Name</h3>
@@ -130,27 +130,27 @@
                             <div id="result-details-ratings-original" class="result-details-ratings-original">
                                 <span id="result-details-ratings-original-volume-prompt">Volume:</span>
                                 <p id="result-details-ratings-original-volume">
-                                    <span class="fas fa-star"></span>
-                                    <span class="fas fa-star"></span>
-                                    <span class="fas fa-star"></span>
-                                    <span class="fas fa-star"></span>
-                                    <span class="fas fa-star"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
                                 </p>
                                 <span id="result-details-ratings-original-comfort-prompt">Comfort:</span>
                                 <p id="result-details-ratings-original-comfort">
-                                    <span class="fas fa-star"></span>
-                                    <span class="fas fa-star"></span>
-                                    <span class="fas fa-star"></span>
-                                    <span class="fas fa-star"></span>
-                                    <span class="fas fa-star"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
                                 </p>
                                 <span id="result-details-ratings-original-extras-prompt">Amenities:</span>
                                 <p id="result-details-ratings-original-extras">
-                                    <span class="fas fa-star"></span>
-                                    <span class="fas fa-star"></span>
-                                    <span class="fas fa-star"></span>
-                                    <span class="fas fa-star"></span>
-                                    <span class="fas fa-star"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
                                 </p>
                                 <a id="btn-result-details-rating-rate" class="waves-effect waves-light btn">Rate It!</a>
                             </div>
@@ -213,6 +213,13 @@
                                 <a id="btn-result-details-rating-cancel" class="waves-effect waves-light btn">Cancel</a>
                             </div>
                         </div>
+                    </div>
+                    <div id="result-details-comments">
+                        <h3>Comments</h3>
+                        <div id="result-details-comments-container" style="display: grid;grid-gap: 2px;grid-template-columns: 1fr;grid-auto-rows: 1fr;">
+                        </div>
+                        <textarea id="input-result-comment" style="width: 80%;height: 5rem;margin-top: 2rem;margin-bottom: 0.5rem;"></textarea>
+                        <a id="btn-result-details-comments-comment" class="waves-effect waves-light btn">Comment!</a>
                     </div>
                 </div>
             </div>
@@ -312,6 +319,69 @@
     </div>
 
     <style>
+        @font-face {
+            font-family: 'icomoon';
+            src: url('assets/fonts/icomoon.eot?h21kbi');
+            src: url('assets/fonts/icomoon.eot?h21kbi#iefix') format('embedded-opentype'),
+            url('assets/fonts/icomoon.ttf?h21kbi') format('truetype'),
+            url('assets/fonts/icomoon.woff?h21kbi') format('woff'),
+            url('assets/fonts/icomoon.svg?h21kbi#icomoon') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        [class^="icon-"],
+        [class*=" icon-"] {
+            /* use !important to prevent issues with browser extensions that change fonts */
+            font-family: 'icomoon' !important;
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+
+            /* Better Font Rendering =========== */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .icon-chevron-right:before {
+            content: "\e900";
+        }
+
+        .icon-connection:before {
+            content: "\e91b";
+        }
+
+        .icon-cog:before {
+            content: "\e994";
+        }
+
+        .icon-spoon-knife:before {
+            content: "\e9a3";
+        }
+
+        .icon-power-cord:before {
+            content: "\e9b7";
+        }
+
+        .icon-star-empty:before {
+            content: "\e9d7";
+        }
+
+        .icon-star-half:before {
+            content: "\e9d8";
+        }
+
+        .icon-star-full:before {
+            content: "\e9d9";
+        }
+
+        .icon-cross:before {
+            content: "\ea0f";
+        }
+
         :root {
             --colorClemsonOrange: #F66733;
             --colorTextPrimary: black;
@@ -412,6 +482,32 @@
             cursor: pointer;
         }
 
+        .result-details-images {
+            overflow: auto;
+        }
+
+        ul.result-details-images-container {
+            float: left;
+            margin-right: -999em;
+            margin-bottom: 0;
+            white-space: nowrap;
+            list-style: none;
+            height: 40vh;
+            padding: 1rem;
+        }
+
+        li.result-details-image-li {
+            margin: 5px;
+            display: inline;
+            float: left;
+        }
+
+        img.result-details-image {
+            display: block;
+            height: 30vh;
+            width: auto;
+        }
+
         .result-details-ratings>div {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -465,66 +561,6 @@
             overflow-y: auto;
         }
 
-        @media only screen and (max-width: 992px) {
-            .main {
-                grid-template-columns: 4fr 6fr;
-            }
-
-            .result-details-ratings>div {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                grid-auto-rows: 1fr;
-                grid-column-gap: 1rem;
-                align-items: center;
-            }
-
-            .result-details-ratings>div>span {
-                grid-column: 1;
-            }
-
-            .result-details-ratings>div>p {
-                grid-column: 2;
-            }
-
-            .result-details-ratings>div>a.btn {
-                grid-column: 1;
-            }
-
-            .result-details-ratings>div>a.btn+a.btn {
-                grid-column: 2;
-            }
-        }
-
-        @media only screen and (max-width: 600px) {
-            :root {
-                --left-area-width: calc(100vw - 35px);
-            }
-            .main {
-                grid-template-columns: 0fr 7fr;
-            }
-            .left-area {
-                position: absolute;
-                width: 100vw;
-                height: 100vh;
-                z-index: 10;
-            }
-            .left-sidebar-tab {
-                display: block;
-            }
-            .left-sidebar-tab-placeholder {
-                display: block;
-            }
-            .left-area.slide-hide {
-                transform: translateX(calc(-1*var(--left-area-width)));
-            }
-            .left-area .left-sidebar-tab-icon svg {
-                transition: transform 0.1s ease-in-out;
-            }
-            .left-area.slide-hide .left-sidebar-tab-icon svg {
-                transform: rotate(180deg);
-            }
-        }
-
         .radio-star-group {
             direction: rtl;
             text-align: left;
@@ -535,42 +571,65 @@
         }
 
         .radio-star {
+            font-family: 'icomoon' !important;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
             cursor: pointer;
             display: inline-block;
-            font-style: normal;
-            font-variant: normal;
-            text-rendering: auto;
-            line-height: 1;
             font-family: "Font Awesome 5 Free";
             font-size: 14px;
-            font-weight: 900;
+
+            /* Better Font Rendering =========== */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .radio-star::before {
-            content: "\f005";
+            content: "\e9d7";
         }
 
-        .radio-star-group:hover .radio-star:hover,
-        .radio-star-group:hover .radio-star:hover~.radio-star {
+        .radio-star-group:hover .radio-star:hover::before,
+        .radio-star-group:hover .radio-star:hover~.radio-star::before {
             color: var(--colorAccent);
-            font-weight: 400;
+            content: "\e9d7";
         }
 
-        .radio-star-group:active .radio-star:active,
-        .radio-star-group:active .radio-star:active~.radio-star {
-            font-weight: 900;
+        .radio-star-group:active .radio-star::before,
+        .radio-star-group:active .radio-star::active~.radio-star::before {
+            content: "\e9d9";
         }
 
         .radio-star-input:checked~.radio-star {
             color: var(--colorAccent);
         }
 
-        .radio-star-group:hover .radio-star {
-            font-weight: 900;
+        .radio-star::before,
+        .radio-star-group:hover .radio-star::before {
+            content: "\e9d9";
         }
 
-        .fa-star.checked {
+        .radio-star.checked:before,
+        .icon-star-empty.checked:before,
+        .icon-star-half.checked:before,
+        .icon-star-full.checked:before {
             color: var(--colorAccent);
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .working {
+            content: var(--iconGear);
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            animation: spin 2s linear infinite;
         }
 
         .animate-transform {
@@ -671,6 +730,66 @@
             width: 100%;
             height: 100%;
         }
+
+        @media only screen and (max-width: 992px) {
+            .main {
+                grid-template-columns: 4fr 6fr;
+            }
+
+            .result-details-ratings>div {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-auto-rows: 1fr;
+                grid-column-gap: 1rem;
+                align-items: center;
+            }
+
+            .result-details-ratings>div>span {
+                grid-column: 1;
+            }
+
+            .result-details-ratings>div>p {
+                grid-column: 2;
+            }
+
+            .result-details-ratings>div>a.btn {
+                grid-column: 1;
+            }
+
+            .result-details-ratings>div>a.btn+a.btn {
+                grid-column: 2;
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            :root {
+                --left-area-width: calc(100vw - 35px);
+            }
+            .main {
+                grid-template-columns: 0fr 7fr;
+            }
+            .left-area {
+                position: absolute;
+                width: 100vw;
+                height: 100vh;
+                z-index: 10;
+            }
+            .left-sidebar-tab {
+                display: block;
+            }
+            .left-sidebar-tab-placeholder {
+                display: block;
+            }
+            .left-area.slide-hide {
+                transform: translateX(calc(-1*var(--left-area-width)));
+            }
+            .left-area .left-sidebar-tab-icon svg {
+                transition: transform 0.1s ease-in-out;
+            }
+            .left-area.slide-hide .left-sidebar-tab-icon svg {
+                transform: rotate(180deg);
+            }
+        }
     </style>
 
     <script>
@@ -696,6 +815,7 @@
         let inputDistance = $("#input-distance");
         let inputLocationOpt = $("input[name=opt-location]");
         let buttonLocationGPS = $("#btn-location-gps");
+        let buttonLocationGPSStatus = $('#btn-location-gps-status');
         buttonLocationGPS.click((e) => {
             $("#opt-location-gps").click();
             inputLocation.val(userCoords.latitude + ", " + userCoords.longitude);
@@ -720,6 +840,7 @@
         let detailDiv = $('#result-details');
         let detailClose = $('#result-details-close');
         detailClose.click(closeDetailPanel);
+        let detailImageScroller = $('#result-details-images-container');
         let ratingsOriginalDiv = $('#result-details-ratings-original');
         let ratingsUserDiv = $('#result-details-ratings-user');
         let ratingUserToggle = $('#result-details-ratings');
@@ -741,6 +862,24 @@
         let resultsStatusDiv = $('#results-status');
         let resultsStatusText = $('#results-status-text');
         resultsStatusDiv.hide();
+        let resultsCommentsDiv = $('#result-details-comments-container');
+        let inputResultsComment = $('#input-result-comment');
+        let btnResultsComment = $('#btn-result-details-comments-comment');
+        btnResultsComment.click((e) => {
+            if (inputResultsComment.val().length != 0) {
+                let commentItem = document.createElement("div");
+                commentItem.style.padding = "0 0.5rem";
+                let commentUser = document.createElement("p");
+                let commentText = document.createElement("p");
+                commentItem.style.backgroundColor = "#efefef";
+                $(commentUser).text("User A");
+                $(commentText).text(inputResultsComment.val());
+                commentItem.appendChild(commentUser);
+                commentItem.appendChild(commentText);
+                resultsCommentsDiv.append(commentItem);
+                inputResultsComment.val("");
+            }
+        });
 
         let resultsArr;
         let curResults;
@@ -859,10 +998,26 @@
         function updateDetailPanel(resultItem) {
             let resultIdx = Array.prototype.indexOf.call(resultsDiv[0].children, resultItem);
             let result = resultsArr[resultIdx];
+            updateDisplayedImages(result);
             $("#result-details-info-name").text(result.name);
             $("#result-details-info-description").text(result.description);
             updateDisplayedRating(result);
-            //!!TODO: add images
+        }
+
+        function updateDisplayedImages(result) {
+            detailImageScroller.empty();
+            let imagesArr = result.images;
+            if (imagesArr && imagesArr.length != 0) {
+                imagesArr.map((imageSrc) => {
+                    let imageItemLi = document.createElement("li");
+                    imageItemLi.classList.add("result-details-image-li");
+                    let imageItem = document.createElement("img");
+                    imageItem.classList.add("result-details-image");
+                    imageItem.src = imageSrc;
+                    imageItemLi.appendChild(imageItem);
+                    detailImageScroller.append(imageItemLi);
+                });
+            }
         }
 
         function switchLeftSidebar(resultItem) {
@@ -912,6 +1067,7 @@
         }
 
         function closeDetailPanel(evt) {
+            if (ratingUserToggle[0].checked) toggleUserRating(false);
             toggleInputsArea();
         }
 
@@ -999,6 +1155,10 @@
                 if (error.code === error.PERMISSION_DENIED) {
                     let response = confirm("Uh oh, I need permission to get your location.\nOtherwise, the option will be unavailable. Should I keep trying?");
                     if (response) watchGeolocation();
+                    else {
+                        buttonLocationGPS.removeClass("working");
+                        buttonLocationGPS.addClass("stopped");
+                    }
                 }
                 else {
                     let errorMessage = "";
@@ -1027,6 +1187,7 @@
         }
         function initGeolocation() {
             if ("geolocation" in navigator) {
+                //buttonLocationGPSStatus.addClass("working");
                 // geolocation is available
                 watchGeolocation();
             } else {
@@ -1052,8 +1213,8 @@
             updateSuggestions(sampleQuery);
         });//*/
     </script>
-    <script src="database-scripts.js"></script>
-    <script src="results-scripts.js"></script>
+    <script src="assets/js/database-scripts.js"></script>
+    <script src="assets/js/results-scripts.js"></script>
 
 </body>
 

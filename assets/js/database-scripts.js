@@ -54,6 +54,10 @@ var dbData = [
         "1": {
             "name": "Watt",
             "description": "A newer, high-tech center with collaborative spaces.",
+            "images": [
+                "https://i.imgur.com/ydxcRHo.jpg",
+                "https://i.imgur.com/RQJFR93.jpg"
+            ],
             "amenities": {
                 "outlets": 1,
                 "food and drink": 1,
@@ -160,6 +164,10 @@ var dbData = [
         "2": {
             "name": "Rhodes",
             "description": "An engineering building with classrooms and atriums.",
+            "images": [
+                "https://i.imgur.com/LULAhsx.png",
+                "https://i.imgur.com/KwpI1mo.jpg"
+            ],
             "amenities": {
                 "outlets": 1,
                 "food and drink": 0,
@@ -260,6 +268,10 @@ var dbData = [
         "3": {
             "name": "Strom",
             "description": "A smaller and private history space.",
+            "images": [
+                "https://i.imgur.com/cz26i7g.jpg",
+                "https://i.imgur.com/P6uw61o.jpg"
+            ],
             "amenities": {
                 "outlets": 1,
                 "food and drink": 0,
@@ -354,6 +366,10 @@ var dbData = [
         "4": {
             "name": "Lehotsky",
             "description": "A building on the Ag Quad with classrooms and atriums.",
+            "images": [
+                "https://i.imgur.com/BpyCLkZ.jpg",
+                "https://i.imgur.com/xPBqum2.jpg"
+            ],
             "amenities": {
                 "outlets": 1,
                 "food and drink": 0,
@@ -452,6 +468,10 @@ var dbData = [
         "5": {
             "name": "Riggs",
             "description": "An engineering building with classrooms and atriums.",
+            "images": [
+                "https://i.imgur.com/GGAiFS0.jpg",
+                "https://i.imgur.com/K4Z3e9D.jpg"
+            ],
             "amenities": {
                 "outlets": 1,
                 "food and drink": 0,
@@ -558,6 +578,10 @@ var dbData = [
         "6": {
             "name": "ASC",
             "description": "A center for learning with study rooms and atriums.",
+            "images": [
+                "https://i.imgur.com/T4o0BSL.jpg",
+                "https://i.imgur.com/dOlRY1S.jpg"
+            ],
             "amenities": {
                 "outlets": 1,
                 "food and drink": 1,
@@ -664,6 +688,12 @@ var dbData = [
         "7": {
             "name": "Hendrix",
             "description": "A student center with open collaborative spaces.",
+            "images": [
+                "https://hdkb.clemson.edu/phpkb/assets/IPCM/hendrix.JPG",
+                "http://schooldesigns.com/Portals/0/SD_Images/Projects/048-Hendrix%20Coffee%20Shop.jpg",
+                "http://schooldesigns.com/Portals/0/SD_Images/Projects/048-Hendrix%20Theatre%20Entry.jpg",
+                "http://schooldesigns.com/Portals/0/SD_Images/Projects/048-Hendrix%20Lobby%20Interior.jpg"
+            ],
             "amenities": {
                 "outlets": 1,
                 "food and drink": 1,
@@ -746,6 +776,10 @@ var dbData = [
         "8": {
             "name": "Edwards",
             "description": "A health center building with classrooms and study desks.",
+            "images": [
+                "https://i.imgur.com/uyRAB8G.jpg",
+                "https://i.imgur.com/EP7yNwi.jpg"
+            ],
             "amenities": {
                 "outlets": 1,
                 "food and drink": 0,
@@ -846,6 +880,10 @@ var dbData = [
         "9": {
             "name": "McAdams",
             "description": "A joint-academic building with atriums, computer labs and classrooms.",
+            "images": [
+                "https://i.imgur.com/rqhzH49.jpg",
+                "https://i.imgur.com/LGuN252.png"
+            ],
             "amenities": {
                 "outlets": 1,
                 "food and drink": 0,
@@ -946,6 +984,10 @@ var dbData = [
         "10": {
             "name": "Poole",
             "description": "A building on the Ag Quad with classrooms and atriums.",
+            "images": [
+                "https://i.imgur.com/3UzqWCQ.jpg",
+                "https://i.imgur.com/m8pJIoA.jpg"
+            ],
             "amenities": {
                 "outlets": 1,
                 "food and drink": 0,
@@ -1046,6 +1088,10 @@ var dbData = [
         "11": {
             "name": "Ampitheatre",
             "description": "An outdoor space at the center of campus.",
+            "images": [
+                "https://i.imgur.com/HQXbzjI.jpg",
+                "https://i.imgur.com/clZuCbr.jpg"
+            ],
             "amenities": {
                 "outlets": 0,
                 "food and drink": 0,
@@ -1063,6 +1109,68 @@ var dbData = [
                     "volume": "3",
                     "comfort": "1",
                     "extras": "4"
+                },
+                "community": []
+            },
+            "floors": []
+        }
+    },
+    {
+        "12": {
+            "name": "Starbucks",
+            "description": "A coffee chain with indoor and outdoor seating.",
+            "images": [
+                "https://i.imgur.com/RtbNH8m.jpg",
+                "https://i.imgur.com/yS5Gtlw.jpg"
+            ],
+            "amenities": {
+                "outlets": 1,
+                "food and drink": 1,
+                "wifi": 1
+            },
+            "location": {
+                "coordinates": {
+                    "latitude": "34.6906219",
+                    "longitude": "-82.8344631"
+                },
+                "address": "1082 Tiger Blvd, Clemson, SC 29631"
+            },
+            "ratings": {
+                "original": {
+                    "volume": "3",
+                    "comfort": "3",
+                    "extras": "4"
+                },
+                "community": []
+            },
+            "floors": []
+        }
+    },
+    {
+        "13": {
+            "name": "McDonalds",
+            "description": "An American styled fast food restaurant with indoor seating and a kids playhouse.",
+            "images": [
+                "https://i.imgur.com/GT54Bgq.jpg",
+                "https://i.imgur.com/bsOrrDC.jpg"
+            ],
+            "amenities": {
+                "outlets": 1,
+                "food and drink": 1,
+                "wifi": 1
+            },
+            "location": {
+                "coordinates": {
+                    "latitude": "34.6918245",
+                    "longitude": "-82.8370091"
+                },
+                "address": "1065 Tiger Blvd, Clemson, SC 29631"
+            },
+            "ratings": {
+                "original": {
+                    "volume": "3",
+                    "comfort": "3",
+                    "extras": "3"
                 },
                 "community": []
             },
