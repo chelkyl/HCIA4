@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-    <link rel="stylesheet" href="assets/css/results-area.css">
+    <link rel="stylesheet" href="assets/css/main-styles.css">
+    <!-- <link rel="stylesheet" href="assets/css/results-area.css"> -->
     <title>Project Optima</title>
 </head>
 
@@ -16,7 +17,7 @@
                 <div id="inputs-area" class="inputs-area sidebar-section animate-transform">
                     <h3>Team Optima Milestone 3</h3>
                     <p>Noise Level:</p>
-                    <div id="volume-option">
+                    <div id="volume-option" class="input-option">
                         <p>
                             <label>
                                 <input name="opt-volume" type="radio" value="1" />
@@ -42,7 +43,7 @@
                             </label>
                         </p>
                     </div>
-                    <div id="group-option">
+                    <div id="group-option" class="input-option">
                         <p>Group Size:</p>
                         <p>
                             <label>
@@ -59,28 +60,39 @@
                             </label>
                         </p>
                     </div>
-                    <div id="distance-option">
+                    <div id="distance-option" class="input-option">
                         <p>Distance:</p>
                         <span>
                             <input id="input-distance" type="number" name="distance" min="1" value="5" /> miles
                         </span>
                     </div>
-                    <div id="location-option">
+                    <div id="location-option" class="input-option">
                         <p>From:</p>
                         <input id="opt-location-gps" name="opt-location" type="radio" value="gps" class="hidden" />
-                        <div id="btn-location-gps" class="waves-effect waves-light btn" disabled>
-                            my location
-                            <span id="btn-location-gps-status"></span>
+                        <div id="split-btn-location-gps" class="split-button">
+                            <div id="btn-location-gps" class="waves-effect waves-light btn split-button-left" disabled>
+                                <span>my location</span>
+                            </div>
+                            <div class="vertical-divider"></div>
+                            <span id="right-btn-location-status" class="btn split-button-right" disabled>
+                                <img id="btn-location-gps-status" src="assets/svg/cog.svg" class="svg-content" />
+                            </span>
                         </div>
                         <input id="opt-location-address" name="opt-location" type="radio" value="address" class="hidden" />
                         <div id="btn-location-address" class="waves-effect waves-light btn">
-                            address
+                            <span>address</span>
                         </div>
-                        <div id="location-address-option" class="input-field">
-                            <input type="text" id="input-location" name="opt-address" placeholder="Your Location" readonly/>
+                        <div id="location-address-option" class="input-field location-address-option">
+                            <input type="text" id="input-location" class="location-address-input validate" name="opt-address" placeholder="Enter location"
+                            />
+                            <span id="input-location-status" class="helper-text"></span>
+                            <div id="geocode-location-status-container" class="geocode-location-status-container">
+                                <img id="geocode-location-status" src="assets/svg/check_black.svg" class="geocode-location-status" />
+                            </div>
                         </div>
+                        <!-- //!! https://developers.google.com/maps/documentation/javascript/places -->
                     </div>
-                    <div id="amenities-option">
+                    <div id="amenities-option" class="input-option">
                         <p>Amenities:</p>
                         <p>
                             <label>
@@ -107,9 +119,7 @@
                     <div id="result-details-toolbar" class="result-details-toolbar">
                         <div id="result-details-close" class="result-details-close">
                             <div class="svg-container">
-                                <svg viewBox="0 0 32 32" preserveAspectRatio="xMinYMin meet" class="svg-content">
-                                    <path d="M31.708 25.708c-0-0-0-0-0-0l-9.708-9.708 9.708-9.708c0-0 0-0 0-0 0.105-0.105 0.18-0.227 0.229-0.357 0.133-0.356 0.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13 0.048-0.252 0.124-0.357 0.228 0 0-0 0-0 0l-9.708 9.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057 0.229l-4.586 4.586c-0.286 0.286-0.361 0.702-0.229 1.057 0.049 0.13 0.124 0.252 0.229 0.357 0 0 0 0 0 0l9.708 9.708-9.708 9.708c-0 0-0 0-0 0-0.104 0.105-0.18 0.227-0.229 0.357-0.133 0.355-0.057 0.771 0.229 1.057l4.586 4.586c0.286 0.286 0.702 0.361 1.057 0.229 0.13-0.049 0.252-0.124 0.357-0.229 0-0 0-0 0-0l9.708-9.708 9.708 9.708c0 0 0 0 0 0 0.105 0.105 0.227 0.18 0.357 0.229 0.356 0.133 0.771 0.057 1.057-0.229l4.586-4.586c0.286-0.286 0.362-0.702 0.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z"></path>
-                                </svg>
+                                <img src="assets/svg/cross.svg" class="svg-content" />
                             </div>
                         </div>
                     </div>
@@ -226,13 +236,7 @@
                 <label for="left-sidebar-tab-toggle">
                     <div id="left-sidebar-tab-icon" class="left-sidebar-tab-icon">
                         <div class="svg-container">
-                            <svg viewBox="0 0 451.846 451.847" preserveAspectRatio="xMinYMin meet" class="svg-content">
-                                <g>
-                                    <path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
-                		L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
-                		c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z" />
-                                </g>
-                            </svg>
+                            <img src="assets/svg/chevron-right.svg" class="svg-content" />
                         </div>
                     </div>
                 </label>
@@ -242,9 +246,7 @@
         </div>
         <div id="upper-right-area" class="upper-right-area">
             <!-- Google Maps -->
-            <div class="google-maps">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1640.5468125052207!2d-82.83896859169491!3d34.67758644511011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88585e1135ab658d%3A0x8d3219cb792a8e56!2sClemson+University!5e0!3m2!1sen!2sus!4v1519779318854"
-                    width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            <div id="google-map" class="google-maps">
             </div>
             <!-- End Google Maps -->
         </div>
@@ -259,17 +261,13 @@
                                 <option value="rating">Rating</option>
                             </select>
                         </div>
-                        <!-- https://codepen.io/w3core/pen/DjLml -->
                     </div>
                 </div>
                 <div id="search-area" class="search-area col s7 m7 l7 offset-l2">
                     <label for="results-search">
                         <div id="search-icon" class="search-icon inline-block grey lighten-2">
                             <div class="svg-container">
-                                <svg viewBox="0 0 1024 1024" preserveAspectRatio="xMinYMin meet" class="svg-content">
-                                    <path d="M1015 969L732 687q100-117 100-271 0-172-122-294T416 0 122 122 0 416t122 294 294 122q154 0 271-100l282 283q10 9 23 9t23-9q9-10 9-23t-9-23zM553 740q-65 28-137 28t-137-28q-63-26-112-75T92 553q-28-65-28-137t28-137q26-63 75-112t112-75q65-28 137-28t137 28q63 26 112 75t75 112q28 65 28 137t-28 137q-26 63-75 112t-112 75z"
-                                    />
-                                </svg>
+                                <img src="assets/svg/search.svg" class="svg-content" />
                             </div>
                         </div>
                         <div id="search-inputarea" class="search-inputarea inline-block input-field">
@@ -315,909 +313,13 @@
             </div>
         </div>
     </div>
-
-    <style>
-        @font-face {
-            font-family: 'icomoon';
-            src: url('assets/fonts/icomoon.eot?h21kbi');
-            src: url('assets/fonts/icomoon.eot?h21kbi#iefix') format('embedded-opentype'),
-            url('assets/fonts/icomoon.ttf?h21kbi') format('truetype'),
-            url('assets/fonts/icomoon.woff?h21kbi') format('woff'),
-            url('assets/fonts/icomoon.svg?h21kbi#icomoon') format('svg');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        [class^="icon-"],
-        [class*=" icon-"] {
-            /* use !important to prevent issues with browser extensions that change fonts */
-            font-family: 'icomoon' !important;
-            speak: none;
-            font-style: normal;
-            font-weight: normal;
-            font-variant: normal;
-            text-transform: none;
-            line-height: 1;
-
-            /* Better Font Rendering =========== */
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .icon-chevron-right:before {
-            content: "\e900";
-        }
-
-        .icon-connection:before {
-            content: "\e91b";
-        }
-
-        .icon-cog:before {
-            content: "\e994";
-        }
-
-        .icon-spoon-knife:before {
-            content: "\e9a3";
-        }
-
-        .icon-power-cord:before {
-            content: "\e9b7";
-        }
-
-        .icon-star-empty:before {
-            content: "\e9d7";
-        }
-
-        .icon-star-half:before {
-            content: "\e9d8";
-        }
-
-        .icon-star-full:before {
-            content: "\e9d9";
-        }
-
-        .icon-cross:before {
-            content: "\ea0f";
-        }
-
-        :root {
-            --colorClemsonOrange: #F66733;
-            --colorTextPrimary: black;
-            --colorTextSecondary: #9e9e9e;
-            --colorAccent: var(--colorClemsonOrange);
-        }
-
-        body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-        }
-
-        .main {
-            display: grid;
-            grid-gap: 1px;
-            width: 100vw;
-            height: 100vh;
-            grid-template-columns: 3fr 7fr;
-            grid-template-rows: 1fr 1fr;
-            justify-items: stretch;
-            align-items: stretch;
-            justify-content: space-between;
-            align-content: space-between;
-        }
-
-        .left-area {
-            display: flex;
-            flex-direction: row;
-            grid-column: 1;
-            grid-row: span 2;
-            background-color: white;
-        }
-
-        .left-sidebar {
-            --slide-panel-width: 110%;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-auto-rows: 1fr;
-
-            padding-left: 1rem;
-            flex-grow: 4;
-            height: 100%;
-            overflow-y: auto;
-        }
-
-        #input-groupsize {
-            width: 4rem;
-            height: 1.5rem;
-            margin-left: 0.5rem;
-        }
-
-        #input-distance {
-            width: 4rem;
-        }
-
-        #location-address-option {
-            width: 80%;
-        }
-
-        .inputs-area {
-            display: block;
-            position: relative;
-            grid-area: 1 / 1;
-        }
-
-        .sidebar-section {
-            padding-bottom: 2rem;
-        }
-
-        .inputs-area.slide-hide {
-            transform: translateX(calc(-1*var(--slide-panel-width)));
-        }
-
-        .result-details {
-            display: block;
-            grid-area: 1 / 1;
-            background-color: white;
-        }
-
-        .result-details.slide-hide {
-            transform: translateX(calc(-1*var(--slide-panel-width)));
-        }
-
-        .result-details-ratings>div.slide-hide {
-            transform: translateX(calc(-1*var(--slide-panel-width)));
-        }
-
-        .result-details-toolbar {
-            display: flex;
-            flex-direction: row;
-            padding: 1rem;
-        }
-
-        .result-details-close {
-            width: 36px;
-            margin-left: auto;
-            cursor: pointer;
-        }
-
-        .result-details-images {
-            overflow: auto;
-        }
-
-        ul.result-details-images-container {
-            float: left;
-            margin-right: -999em;
-            margin-bottom: 0;
-            white-space: nowrap;
-            list-style: none;
-            height: 40vh;
-            padding: 1rem;
-        }
-
-        li.result-details-image-li {
-            margin: 5px;
-            display: inline;
-            float: left;
-        }
-
-        img.result-details-image {
-            display: block;
-            height: 30vh;
-            width: auto;
-        }
-
-        .result-details-ratings>div {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-auto-rows: 1fr;
-            grid-column-gap: 1rem;
-            align-items: center;
-        }
-
-        .result-details-ratings>div>span {
-            grid-column: 1;
-        }
-
-        .result-details-ratings>div>p {
-            grid-column: 2 / span 2;
-        }
-
-        .result-details-ratings>div>a.btn {
-            grid-column: 1;
-        }
-
-        .result-details-ratings>div>a.btn+a.btn {
-            grid-column: 2;
-        }
-
-        .left-sidebar-tab,
-        .left-sidebar-tab-placeholder {
-            display: none;
-            width: 35px;
-            height: 100%;
-        }
-
-        .left-sidebar-tab-toggle+label {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            flex-direction: column;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .upper-right-area {
-            grid-column: 2;
-            grid-row: 1;
-            background-color: white;
-        }
-
-        .lower-right-area {
-            grid-column: 2;
-            grid-row: 2;
-            background-color: white;
-            overflow-y: auto;
-        }
-
-        .radio-star-group {
-            direction: rtl;
-            text-align: left;
-        }
-
-        .radio-star-input {
-            display: none;
-        }
-
-        .radio-star {
-            font-family: 'icomoon' !important;
-            font-style: normal;
-            font-weight: normal;
-            font-variant: normal;
-            text-transform: none;
-            line-height: 1;
-            cursor: pointer;
-            display: inline-block;
-            font-family: "Font Awesome 5 Free";
-            font-size: 14px;
-
-            /* Better Font Rendering =========== */
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .radio-star::before {
-            content: "\e9d7";
-        }
-
-        .radio-star-group:hover .radio-star:hover::before,
-        .radio-star-group:hover .radio-star:hover~.radio-star::before {
-            color: var(--colorAccent);
-            content: "\e9d7";
-        }
-
-        .radio-star-group:active .radio-star::before,
-        .radio-star-group:active .radio-star::active~.radio-star::before {
-            content: "\e9d9";
-        }
-
-        .radio-star-input:checked~.radio-star {
-            color: var(--colorAccent);
-        }
-
-        .radio-star::before,
-        .radio-star-group:hover .radio-star::before {
-            content: "\e9d9";
-        }
-
-        .radio-star.checked:before,
-        .icon-star-empty.checked:before,
-        .icon-star-half.checked:before,
-        .icon-star-full.checked:before {
-            color: var(--colorAccent);
-        }
-
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .working {
-            content: var(--iconGear);
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            animation: spin 2s linear infinite;
-        }
-
-        .animate-transform {
-            transition: transform 0.2s ease-out;
-        }
-
-        input::placeholder {
-            color: black;
-        }
-
-        input[type="radio"]:checked+.btn {
-            color: #fafafa;
-            background-color: var(--colorAccent);
-        }
-
-        input[type="radio"]:checked+span,
-        input[type="checkbox"].filled-in:checked+span:not(.lever) {
-            color: var(--colorAccent);
-        }
-
-        input[type="radio"]:checked+span::after,
-        input[type="checkbox"].filled-in:checked+span:not(.lever)::after {
-            border-color: var(--colorAccent);
-            background-color: var(--colorAccent);
-        }
-
-        input:not([type]):focus:not([readonly]),
-        input[type=text]:not(.browser-default):focus:not([readonly]),
-        input[type=password]:not(.browser-default):focus:not([readonly]),
-        input[type=email]:not(.browser-default):focus:not([readonly]),
-        input[type=url]:not(.browser-default):focus:not([readonly]),
-        input[type=time]:not(.browser-default):focus:not([readonly]),
-        input[type=date]:not(.browser-default):focus:not([readonly]),
-        input[type=datetime]:not(.browser-default):focus:not([readonly]),
-        input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
-        input[type=tel]:not(.browser-default):focus:not([readonly]),
-        input[type=number]:not(.browser-default):focus:not([readonly]),
-        input[type=search]:not(.browser-default):focus:not([readonly]),
-        textarea.materialize-textarea:focus:not([readonly]) {
-            border-bottom-color: var(--colorAccent);
-            box-shadow: unset;
-        }
-
-        .select-wrapper>ul>li>span {
-            color: var(--colorAccent);
-        }
-
-        .btn:not([disabled]) {
-            background-color: #eceff1;
-            border: 1px solid var(--colorAccent);
-        }
-
-        .btn {
-            color: var(--colorAccent);
-        }
-
-        .btn[disabled] {
-            color: #9e9e9e;
-        }
-
-        .btn:hover,
-        .btn:focus {
-            color: #fafafa;
-            background-color: var(--colorAccent);
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .inline-block {
-            display: inline-block !important;
-        }
-
-        .svg-container {
-            display: inline-block;
-            position: relative;
-            width: 100%;
-            padding-bottom: 100%;
-            vertical-align: middle;
-            overflow: hidden;
-        }
-
-        .svg-content {
-            display: inline-block;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .google-maps {
-            position: relative;
-            padding-bottom: 0%;
-            height: 100%;
-        }
-
-        .google-maps iframe {
-            width: 100%;
-            height: 100%;
-        }
-
-        @media only screen and (max-width: 992px) {
-            .main {
-                grid-template-columns: 4fr 6fr;
-            }
-
-            .result-details-ratings>div {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                grid-auto-rows: 1fr;
-                grid-column-gap: 1rem;
-                align-items: center;
-            }
-
-            .result-details-ratings>div>span {
-                grid-column: 1;
-            }
-
-            .result-details-ratings>div>p {
-                grid-column: 2;
-            }
-
-            .result-details-ratings>div>a.btn {
-                grid-column: 1;
-            }
-
-            .result-details-ratings>div>a.btn+a.btn {
-                grid-column: 2;
-            }
-        }
-
-        @media only screen and (max-width: 600px) {
-            :root {
-                --left-area-width: calc(100vw - 35px);
-            }
-            .main {
-                grid-template-columns: 0fr 7fr;
-            }
-            .left-area {
-                position: absolute;
-                width: 100vw;
-                height: 100vh;
-                z-index: 10;
-            }
-            .left-sidebar-tab {
-                display: block;
-            }
-            .left-sidebar-tab-placeholder {
-                display: block;
-            }
-            .left-area.slide-hide {
-                transform: translateX(calc(-1*var(--left-area-width)));
-            }
-            .left-area .left-sidebar-tab-icon svg {
-                transition: transform 0.1s ease-in-out;
-            }
-            .left-area.slide-hide .left-sidebar-tab-icon svg {
-                transform: rotate(180deg);
-            }
-        }
-    </style>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApqJNlgAOhhTF4zqTwfSe0IuRtfxoM_dM&callback=initMap"></script>-->
-    <script>
-        let leftArea = $('#left-area');
-        let leftSidebar = $('#left-sidebar');
-        let leftSidebarTab = $('#left-sidebar-tab');
-        leftSidebarTab.click((e) => {
-            let selectedResult = $(".result-item>input[type=radio]:checked");
-            if (selectedResult.length != 0)
-                selectedResult[0].checked = false;
-        });
-        let leftSidebarToggle = $('#left-sidebar-tab-toggle');
-        leftSidebarToggle.change(toggleLeftSidebar);
-
-        let inputsDiv = $('#inputs-area');
-        let inputVolumeOpt = $("input[name=opt-volume]");
-        let inputGroupOpt = $("input[name=opt-group]");
-        let inputGroupOptMultiple = $("#opt-group-multiple");
-        inputGroupOptMultiple.click((e) => {
-            inputGroupSize.focus();
-        });
-        let inputGroupSize = $("#input-groupsize");
-        let inputDistance = $("#input-distance");
-        let inputLocationOpt = $("input[name=opt-location]");
-        let buttonLocationGPS = $("#btn-location-gps");
-        let buttonLocationGPSStatus = $('#btn-location-gps-status');
-        buttonLocationGPS.click((e) => {
-            $("#opt-location-gps").click();
-            inputLocation.val(userCoords.latitude + ", " + userCoords.longitude);
-        });
-        let buttonLocationAddress = $("#btn-location-address");
-        buttonLocationAddress.click((e) => {
-            $("#opt-location-address").click();
-            inputLocation.focus();
-            inputLocation[0].setSelectionRange(0, inputLocation.val().length);
-        });
-        let inputLocation = $("#input-location");
-        inputLocation.click((e) => {
-            inputLocation[0].setSelectionRange(0, inputLocation.val().length);
-        });
-        let inputAmenitiesOpt = $("input[name=extras]");
-        let buttonSendQuery = $("#btn-submit-query");
-        buttonSendQuery.click((e) => {
-            submitQuery();
-            leftSidebarToggle.click();
-        });
-
-        let detailDiv = $('#result-details');
-        let detailClose = $('#result-details-close');
-        detailClose.click(closeDetailPanel);
-        let detailImageScroller = $('#result-details-images-container');
-        let ratingsOriginalDiv = $('#result-details-ratings-original');
-        let ratingsUserDiv = $('#result-details-ratings-user');
-        let ratingUserToggle = $('#result-details-ratings');
-        let btnRate = $('#btn-result-details-rating-rate');
-        btnRate.click((e) => {
-            toggleUserRating(true);
-        });
-        let btnRateSubmit = $('#btn-result-details-rating-submit');
-        btnRateSubmit.click(submitUserRating);
-        let btnRateCancel = $('#btn-result-details-rating-cancel');
-        btnRateCancel.click(cancelUserRating);
-
-        let resultsDiv = $('#results-area');
-        let resultsSort = $('#results-sort');
-        let resultsSortI = M.FormSelect.init(resultsSort, { classes: "chip select-chip" });
-        resultsSort.change(handleSearchAndSort);
-        let resultsSearch = $('#results-search');
-        resultsSearch.change(handleSearchAndSort);
-        let resultsStatusDiv = $('#results-status');
-        let resultsStatusText = $('#results-status-text');
-        resultsStatusDiv.hide();
-        let resultsCommentsDiv = $('#result-details-comments-container');
-        let inputResultsComment = $('#input-result-comment');
-        let btnResultsComment = $('#btn-result-details-comments-comment');
-        btnResultsComment.click((e) => {
-            if (inputResultsComment.val().length != 0) {
-                let commentItem = document.createElement("div");
-                commentItem.style.padding = "0 0.5rem";
-                let commentUser = document.createElement("p");
-                let commentText = document.createElement("p");
-                commentItem.style.backgroundColor = "#efefef";
-                $(commentUser).text("User A");
-                $(commentText).text(inputResultsComment.val());
-                commentItem.appendChild(commentUser);
-                commentItem.appendChild(commentText);
-                resultsCommentsDiv.append(commentItem);
-                inputResultsComment.val("");
-            }
-        });
-
-        let resultsArr;
-        let curResults;
-
-        let chipSelect = $('.select-chip');
-        let chipSelectInput = $('.select-chip>input');
-        let chipSelectPrompt = document.createElement("span");
-        chipSelectPrompt.innerHTML = "Sort&nbsp;By:";
-        let chipSelectLabel = document.createElement("label");
-        chipSelectLabel.style.height = "100%";
-        //chipSelect.prepend(chipSelectPrompt);
-        chipSelectInput.wrap(chipSelectLabel);
-        chipSelectInput.before(chipSelectPrompt);
-        //chipSelectInput.css("flex-grow", "1");
-
-        const transitionEnd = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
-
-        const ratingsArr = ["volume", "comfort", "extras"];
-
-        let userCoords = {
-            "latitude": undefined,
-            "longitude": undefined
-        };
-        let geolocationWatchId;
-        let geolocationSeenFirstError = false;
-
-        function handleResultItemClick(evt) {
-            updateDetailPanel(this);
-            switchLeftSidebar(this);
-            leftSidebarToggle.prop("checked", false);
-            toggleLeftSidebar(false);
-            //leftSidebarToggle.click();
-        }
-
-        function finishAnimateRatingsOriginal() {
-            ratingsOriginalDiv.removeClass("animate-transform");
-            if (ratingsOriginalDiv.hasClass("slide-hide")) ratingsOriginalDiv.addClass("hidden");
-            ratingsUserDiv.removeClass("hidden");
-            ratingsUserDiv.outerWidth();
-            ratingsUserDiv.removeClass("slide-hide");
-            $(this).off();
-        }
-
-        function finishAnimateRatingsUser() {
-            ratingsUserDiv.removeClass("animate-transform");
-            if (ratingsUserDiv.hasClass("slide-hide")) ratingsUserDiv.addClass("hidden");
-            ratingsOriginalDiv.removeClass("hidden");
-            ratingsOriginalDiv.outerWidth();
-            ratingsOriginalDiv.removeClass("slide-hide");
-            $(this).off();
-        }
-
-        function toggleUserRating(e) {
-            ratingsOriginalDiv.addClass("animate-transform");
-            ratingsUserDiv.addClass("animate-transform");
-            if (e == true || (e.target && e.target.checked)) {
-                ratingsOriginalDiv.addClass("slide-hide");
-                ratingUserToggle[0].checked = true;
-                ratingsOriginalDiv.one(transitionEnd, finishAnimateRatingsOriginal);
-            }
-            else {
-                ratingsUserDiv.addClass("slide-hide");
-                ratingUserToggle[0].checked = false;
-                ratingsUserDiv.one(transitionEnd, finishAnimateRatingsUser);
-            }
-        }
-
-        function cancelUserRating(e) {
-            ratingsUserDiv.find("input[type='radio']:checked").each((idx, el) => {
-                el.checked = false;
-            });
-            toggleUserRating(false);
-        }
-
-        function submitUserRating(e) {
-            let selectedRadioEl = $('#results-area').find("input[type='radio']:checked");
-            if (selectedRadioEl.length != 0) {
-                let resultItem = selectedRadioEl.parent();
-                let resultIdx = Array.prototype.indexOf.call(resultsDiv[0].children, resultItem[0]);
-                let result = resultsArr[resultIdx];
-                let userId = 0;
-                let userRatings = {};
-                for (let i = 0; i < ratingsArr.length; ++i) {
-                    let ratingName = ratingsArr[i];
-                    let selectedRadioStar = ratingsUserDiv.find("input[type='radio'][name='result-details-ratings-user-" + ratingName + "']:checked");
-                    if (selectedRadioStar.length != 0) {
-                        userRatings[ratingName] = selectedRadioStar.val();
-                    }
-                    else {
-                        userRatings[ratingName] = 0;
-                    }
-                }
-                result.ratings.community[userId] = userRatings;
-                updateDisplayedRating(result);
-            }
-            toggleUserRating(false);
-        }
-
-        function updateDisplayedRating(result) {
-            let userId = 0;
-            let ratings = result.ratings.community[userId];
-            if (ratings == undefined) ratings = result.ratings.original;
-            for (let i = 0; i < ratingsArr.length; ++i) {
-                let ratingName = ratingsArr[i];
-                let ratingItemStars = $("#result-details-ratings-original-" + ratingName + ">span");
-                let n;
-                for (n = 0; n < ratings[ratingName]; ++n) {
-                    ratingItemStars[n].classList.add("checked");
-                }
-                for (; n < 5; ++n) {
-                    ratingItemStars[n].classList.remove("checked");
-                }
-            }
-        }
-
-        function updateDetailPanel(resultItem) {
-            let resultIdx = Array.prototype.indexOf.call(resultsDiv[0].children, resultItem);
-            let result = resultsArr[resultIdx];
-            updateDisplayedImages(result);
-            $("#result-details-info-name").text(result.name);
-            $("#result-details-info-description").text(result.description);
-            updateDisplayedRating(result);
-        }
-
-        function updateDisplayedImages(result) {
-            detailImageScroller.empty();
-            let imagesArr = result.images;
-            if (imagesArr && imagesArr.length != 0) {
-                imagesArr.map((imageSrc) => {
-                    let imageItemLi = document.createElement("li");
-                    imageItemLi.classList.add("result-details-image-li");
-                    let imageItem = document.createElement("img");
-                    imageItem.classList.add("result-details-image");
-                    imageItem.src = imageSrc;
-                    imageItemLi.appendChild(imageItem);
-                    detailImageScroller.append(imageItemLi);
-                });
-            }
-        }
-
-        function switchLeftSidebar(resultItem) {
-            let radioEl = resultItem.getElementsByTagName("input")[0];
-            radioEl.checked = !radioEl.checked;
-            let leftAreaWidth = $('#left-area').width();
-            leftArea.css("--slide-panel-width", leftAreaWidth);
-            toggleInputsArea(radioEl.checked);
-        }
-
-        function finishAnimateInputsArea() {
-            inputsDiv.removeClass("animate-transform");
-            if (inputsDiv.hasClass("slide-hide")) inputsDiv.addClass("hidden");
-        }
-
-        function finishAnimateDetailArea() {
-            detailDiv.removeClass("animate-transform");
-            if (detailDiv.hasClass("slide-hide")) detailDiv.addClass("hidden");
-        }
-
-        function toggleInputsArea(checked) {
-            if (checked === undefined) {
-                let selectedRadioEl = $('#results-area').find("input[type='radio']:checked");
-                if (selectedRadioEl.length != 0) {
-                    let radioEl = selectedRadioEl[0];
-                    radioEl.checked = !radioEl.checked;
-                    checked = radioEl.checked;
-                }
-            }
-            inputsDiv.addClass("animate-transform");
-            detailDiv.addClass("animate-transform");
-            if (checked) {
-                inputsDiv.addClass("slide-hide");
-                detailDiv.removeClass("hidden");
-                detailDiv.outerWidth();
-                detailDiv.removeClass("slide-hide");
-            }
-            else {
-                inputsDiv.removeClass("hidden");
-                inputsDiv.outerWidth();
-                inputsDiv.removeClass("slide-hide");
-                detailDiv.addClass("slide-hide");
-            }
-            inputsDiv.one(transitionEnd, finishAnimateInputsArea);
-            detailDiv.one(transitionEnd, finishAnimateDetailArea);
-            if (ratingUserToggle[0].checked) toggleUserRating(false);
-        }
-
-        function closeDetailPanel(evt) {
-            if (ratingUserToggle[0].checked) toggleUserRating(false);
-            toggleInputsArea();
-        }
-
-        function finishAnimateLeftSidebar(checked) {
-            leftArea.removeClass("animate-transform");
-        }
-
-        function toggleLeftSidebar(e) {
-            leftArea.addClass("animate-transform");
-            if (e == true || (e.target && e.target.checked)) {
-                leftArea.addClass("slide-hide");
-            }
-            else {
-                leftArea.removeClass("slide-hide");
-            }
-            leftArea.one(transitionEnd, finishAnimateLeftSidebar);
-        }
-
-        function handleSearchAndSort() {
-            searchSuggestions(curResults);
-        }
-        function submitQuery() {
-            let selectedVolumeOpt = inputVolumeOpt.filter(":checked");
-            let userVolumeMax = selectedVolumeOpt.val();
-            let userVolumeMin = 1;
-            if (!userVolumeMax || userVolumeMax > 4) userVolumeMax = "4";
-            else if (userVolumeMax < 1) userVolumeMax = "1";
-            console.log("User max volume: " + userVolumeMax);
-
-            let selectedGroupOption = inputGroupOpt.filter(":checked");
-            let userCapacity = "1";
-            if (selectedGroupOption.val() === "myself") userCapacity = "1";
-            else {
-                userCapacity = inputGroupSize.val();
-                if (userCapacity < 1) userCapacity = 1;
-            }
-            console.log("User capacity: " + userCapacity);
-
-            let userDistance = inputDistance.val();
-            if (userDistance < 1) userDistance = 1;
-            console.log("User distance: " + userDistance);
-
-            let userCoords;
-            let selectedLocationOption = inputLocationOpt.filter(":checked");
-            if (selectedLocationOption.val() == "address") {
-                //https://developers.google.com/maps/documentation/geocoding/intro
-                userCoords = getCoords();
-            }
-            else userCoords = getCoords();
-            console.log("User coordinates: " + JSON.stringify(userCoords));
-
-            let userAmenities = [];
-            let selectedAmenities = inputAmenitiesOpt.filter(":checked");
-            selectedAmenities.each((idx, amenityEl) => userAmenities.push(amenityEl.value));
-            console.log("User amenities: " + JSON.stringify(userAmenities));
-
-            let query = {
-                "coords": getCoords(),
-                "distance": userDistance,
-                "capacity": userCapacity,
-                "volume": {
-                    "max": userVolumeMax,
-                    "min": userVolumeMin
-                },
-                "amenities": userAmenities
-            };
-            console.log("User query: " + JSON.stringify(query));
-            updateSuggestions(query);
-        }
-        function getCoords() {
-            return {
-                "latitude": userCoords.latitude,
-                "longitude": userCoords.longitude
-            };
-        }
-        function saveCoords(position) {
-            buttonLocationGPS.removeAttr("disabled");
-            userCoords = position.coords;
-            let positionStatus = "Position: " + userCoords.latitude + ", " + userCoords.longitude
-                + "\nAccuracy: " + userCoords.accuracy + "m";
-            console.log(positionStatus);
-        }
-        function handleGeolocationError(error) {
-            if (geolocationSeenFirstError === false) {
-                if (error.code === error.PERMISSION_DENIED) {
-                    let response = confirm("Uh oh, I need permission to get your location.\nOtherwise, the option will be unavailable. Should I keep trying?");
-                    if (response) watchGeolocation();
-                    else {
-                        buttonLocationGPS.removeClass("working");
-                        buttonLocationGPS.addClass("stopped");
-                    }
-                }
-                else {
-                    let errorMessage = "";
-                    switch (error.code) {
-                        case error.POSITION_UNAVAILABLE:
-                            errorMessage = "Uh oh, I couldn't get your location.";
-                            break;
-                        case error.TIMEOUT:
-                            errorMessage = "Uh oh, geolocation timed out while getting location.";
-                            break;
-                    }
-                    errorMessage += "\nI will keep trying but the option will be unavailable until I am successful.";
-                    alert(errorMessage);
-                }
-                geolocationSeenFirstError = true;
-            }
-            console.log("Error " + error.code + ": " + error.message);
-        }
-        function watchGeolocation() {
-            const geo_options = {
-                enableHighAccuracy: true,
-                maximumAge: 1000 * 15,
-                timeout: 1000 * 60
-            };
-            geolocationWatchId = navigator.geolocation.watchPosition(saveCoords, handleGeolocationError, geo_options);
-        }
-        function initGeolocation() {
-            if ("geolocation" in navigator) {
-                //buttonLocationGPSStatus.addClass("working");
-                // geolocation is available
-                watchGeolocation();
-            } else {
-                // geolocation NOT available
-                alert("Geolocation not available. I won't be able to get your coordinates.");
-                console.log("Geolocation not available");
-            }
-        }
-        initGeolocation();
-
-        // /*
-        $(document).ready(function () {
-            userCoords = { latitude: "34.6799357", longitude: "-82.8396752" };
-            const sampleQuery = {
-                "coords": getCoords(),
-                "distance": "50",
-                "capacity": "1",
-                "volume": {
-                    "max": "4",
-                    "min": "1"
-                },
-                "amenities": []
-            };
-            updateSuggestions(sampleQuery);
-        });//*/
-    </script>
-    <script src="assets/js/database-scripts.js"></script>
-    <script src="assets/js/results-scripts.js"></script>
-
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="assets/js/main-scripts.js"></script>
+<script src="assets/js/database-scripts.js"></script>
+<script src="assets/js/results-scripts.js"></script>
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?&callback=onGoogleMapsAPILoaded"></script> -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApqJNlgAOhhTF4zqTwfSe0IuRtfxoM_dM&callback=onGoogleMapsAPILoaded"></script>
 
 </html>

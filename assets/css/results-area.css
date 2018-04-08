@@ -22,13 +22,13 @@
 
 .select-chip>label {
     display: flex;
-    flex: auto;
     flex-direction: row;
     align-items: center;
+    width: 100%;
 }
 
 .select-chip input.select-dropdown {
-    width: 82%;
+    width: calc(100% - 40px);
     height: 100%;
     border: none;
     margin: 0;
@@ -55,6 +55,7 @@
 
 .search-icon {
     width: 3rem;
+    height: 2.5rem;
     padding: 0.75rem;
     padding-top: 0.35rem;
 }
@@ -89,11 +90,14 @@
     width:100%;
 }
 
+.result-item {
+    margin: 0.2rem 0;
+}
+
 .result-item > div {
     display: grid;
     grid-template-columns: 1fr 0fr 7fr 0fr 3fr 0fr 1fr;
     align-items: center;
-    margin: 0.2rem 0;
     padding: 0.5rem 0;
     color: unset;
     cursor: pointer;
@@ -101,6 +105,7 @@
 
 .result-item input[type=radio]:checked + div {
     background-color: #eee;
+    border: 1px solid var(--colorAccent);
 }
 
 .result-item-section {
