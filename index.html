@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link rel="stylesheet" href="assets/css/main-styles.css">
+    <!-- <link rel="stylesheet" href="assets/css/results-area.css"> -->
+    <title>Project Optima</title>
+</head>
+
+<body>
+    <div class="main grey lighten-5">
+        <div id="left-area" class="left-area white">
+            <div id="left-sidebar" class="left-sidebar">
+                <div id="inputs-area" class="inputs-area sidebar-section animate-transform">
+                    <h3>Team Optima Milestone 3</h3>
+                    <p>Noise Level:</p>
+                    <div id="volume-option" class="input-option">
+                        <p>
+                            <label>
+                                <input name="opt-volume" type="radio" value="1" />
+                                <span>Silence</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input name="opt-volume" type="radio" value="2" />
+                                <span>Quiet</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input name="opt-volume" type="radio" value="3" />
+                                <span>Conversations</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input name="opt-volume" type="radio" value="4" />
+                                <span>Active</span>
+                            </label>
+                        </p>
+                    </div>
+                    <div id="group-option" class="input-option">
+                        <p>Group Size:</p>
+                        <p>
+                            <label>
+                                <input id="opt-group-single" name="opt-group" type="radio" value="myself" />
+                                <span>Myself</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input id="opt-group-multiple" name="opt-group" type="radio" value="group" />
+                                <span>Group of
+                                    <input id="input-groupsize" type="number" name="groupsize" min="2" />
+                                </span>
+                            </label>
+                        </p>
+                    </div>
+                    <div id="distance-option" class="input-option">
+                        <p>Distance:</p>
+                        <span>
+                            <input id="input-distance" type="number" name="distance" min="1" value="5" /> miles
+                        </span>
+                    </div>
+                    <div id="location-option" class="input-option">
+                        <p>From:</p>
+                        <input id="opt-location-gps" name="opt-location" type="radio" value="gps" class="hidden" />
+                        <div id="split-btn-location-gps" class="split-button">
+                            <div id="btn-location-gps" class="waves-effect waves-light btn split-button-left" disabled>
+                                <span>my location</span>
+                            </div>
+                            <div class="vertical-divider"></div>
+                            <span id="right-btn-location-status" class="btn split-button-right" disabled>
+                                <img id="btn-location-gps-status" src="assets/svg/cog.svg" class="svg-content" />
+                            </span>
+                        </div>
+                        <input id="opt-location-address" name="opt-location" type="radio" value="address" class="hidden" />
+                        <div id="btn-location-address" class="waves-effect waves-light btn">
+                            <span>address</span>
+                        </div>
+                        <div id="location-address-option" class="input-field location-address-option">
+                            <input type="text" id="input-location" class="location-address-input validate" name="opt-address" placeholder="Enter location"
+                            />
+                            <span id="input-location-status" class="helper-text"></span>
+                            <div id="geocode-location-status-container" class="geocode-location-status-container">
+                                <img id="geocode-location-status" src="assets/svg/check_black.svg" class="geocode-location-status" />
+                            </div>
+                        </div>
+                        <!-- //!! https://developers.google.com/maps/documentation/javascript/places -->
+                    </div>
+                    <div id="amenities-option" class="input-option">
+                        <p>Amenities:</p>
+                        <p>
+                            <label>
+                                <input type="checkbox" name="extras" value="food and drink" class="filled-in" />
+                                <span>Food and Drink Allowed</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" name="extras" value="wifi" class="filled-in" />
+                                <span>Wi-Fi</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" name="extras" value="outlets" class="filled-in" />
+                                <span>Electrical Outlets</span>
+                            </label>
+                        </p>
+                    </div>
+                    <div id="btn-submit-query" class="waves-effect waves-light btn">Find My Space</div>
+                </div>
+                <div id="result-details" class="result-details sidebar-section animate-transform slide-hide">
+                    <div id="result-details-toolbar" class="result-details-toolbar">
+                        <div id="result-details-close" class="result-details-close">
+                            <div class="svg-container">
+                                <img src="assets/svg/cross.svg" class="svg-content" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="result-details-images" class="result-details-images">
+                        <ul id="result-details-images-container" class="result-details-images-container">
+                        </ul>
+                    </div>
+                    <div id="result-details-info">
+                        <h3 id="result-details-info-name">Name</h3>
+                        <p id="result-details-info-description">Description</p>
+                    </div>
+                    <div id="result-details-ratings-container">
+                        <h3>Ratings</h3>
+                        <div id="result-details-ratings" class="result-details-ratings">
+                            <input type="checkbox" id="result-details-ratings-toggle" class="result-details-ratings-toggle" hidden>
+                            <div id="result-details-ratings-original" class="result-details-ratings-original">
+                                <span id="result-details-ratings-original-volume-prompt">Volume:</span>
+                                <p id="result-details-ratings-original-volume">
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                </p>
+                                <span id="result-details-ratings-original-comfort-prompt">Comfort:</span>
+                                <p id="result-details-ratings-original-comfort">
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                </p>
+                                <span id="result-details-ratings-original-extras-prompt">Amenities:</span>
+                                <p id="result-details-ratings-original-extras">
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                    <span class="icon-star-full"></span>
+                                </p>
+                                <a id="btn-result-details-rating-rate" class="waves-effect waves-light btn">Rate It!</a>
+                            </div>
+                            <div id="result-details-ratings-user" class="result-details-ratings-user animate-transform slide-hide hidden">
+                                <span id="result-details-ratings-user-volume-prompt">Volume:</span>
+                                <p id="result-details-ratings-user-volume" class="radio-star-group">
+                                    <input id="result-details-ratings-user-volume-5" type="radio" class="radio-star-input" name="result-details-ratings-user-volume"
+                                        value="5">
+                                    <label for="result-details-ratings-user-volume-5" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-volume-4" type="radio" class="radio-star-input" name="result-details-ratings-user-volume"
+                                        value="4">
+                                    <label for="result-details-ratings-user-volume-4" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-volume-3" type="radio" class="radio-star-input" name="result-details-ratings-user-volume"
+                                        value="3">
+                                    <label for="result-details-ratings-user-volume-3" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-volume-2" type="radio" class="radio-star-input" name="result-details-ratings-user-volume"
+                                        value="2">
+                                    <label for="result-details-ratings-user-volume-2" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-volume-1" type="radio" class="radio-star-input" name="result-details-ratings-user-volume"
+                                        value="1">
+                                    <label for="result-details-ratings-user-volume-1" class="radio-star"></label>
+                                </p>
+                                <span id="result-details-ratings-user-comfort-prompt">Comfort:</span>
+                                <p id="result-details-ratings-user-comfort" class="radio-star-group">
+                                    <input id="result-details-ratings-user-comfort-5" type="radio" class="radio-star-input" name="result-details-ratings-user-comfort"
+                                        value="5">
+                                    <label for="result-details-ratings-user-comfort-5" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-comfort-4" type="radio" class="radio-star-input" name="result-details-ratings-user-comfort"
+                                        value="4">
+                                    <label for="result-details-ratings-user-comfort-4" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-comfort-3" type="radio" class="radio-star-input" name="result-details-ratings-user-comfort"
+                                        value="3">
+                                    <label for="result-details-ratings-user-comfort-3" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-comfort-2" type="radio" class="radio-star-input" name="result-details-ratings-user-comfort"
+                                        value="2">
+                                    <label for="result-details-ratings-user-comfort-2" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-comfort-1" type="radio" class="radio-star-input" name="result-details-ratings-user-comfort"
+                                        value="1">
+                                    <label for="result-details-ratings-user-comfort-1" class="radio-star"></label>
+                                </p>
+                                <span id="result-details-ratings-user-extras-prompt">Amenities:</span>
+                                <p id="result-details-ratings-user-extras" class="radio-star-group">
+                                    <input id="result-details-ratings-user-extras-5" type="radio" class="radio-star-input" name="result-details-ratings-user-extras"
+                                        value="5">
+                                    <label for="result-details-ratings-user-extras-5" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-extras-4" type="radio" class="radio-star-input" name="result-details-ratings-user-extras"
+                                        value="4">
+                                    <label for="result-details-ratings-user-extras-4" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-extras-3" type="radio" class="radio-star-input" name="result-details-ratings-user-extras"
+                                        value="3">
+                                    <label for="result-details-ratings-user-extras-3" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-extras-2" type="radio" class="radio-star-input" name="result-details-ratings-user-extras"
+                                        value="2">
+                                    <label for="result-details-ratings-user-extras-2" class="radio-star"></label>
+                                    <input id="result-details-ratings-user-extras-1" type="radio" class="radio-star-input" name="result-details-ratings-user-extras"
+                                        value="1">
+                                    <label for="result-details-ratings-user-extras-1" class="radio-star"></label>
+                                </p>
+                                <a id="btn-result-details-rating-submit" class="waves-effect waves-light btn">Submit!</a>
+                                <a id="btn-result-details-rating-cancel" class="waves-effect waves-light btn">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="result-details-comments">
+                        <h3>Comments</h3>
+                        <div id="result-details-comments-container" style="display: grid;grid-gap: 2px;grid-template-columns: 1fr;grid-auto-rows: 1fr;">
+                        </div>
+                        <textarea id="input-result-comment" style="width: 80%;height: 5rem;margin-top: 2rem;margin-bottom: 0.5rem;"></textarea>
+                        <a id="btn-result-details-comments-comment" class="waves-effect waves-light btn">Comment!</a>
+                    </div>
+                </div>
+            </div>
+            <div id="left-sidebar-tab" class="left-sidebar-tab">
+                <input type="checkbox" id="left-sidebar-tab-toggle" class="left-sidebar-tab-toggle" hidden>
+                <label for="left-sidebar-tab-toggle">
+                    <div id="left-sidebar-tab-icon" class="left-sidebar-tab-icon">
+                        <div class="svg-container">
+                            <img src="assets/svg/chevron-right.svg" class="svg-content" />
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div id="left-sidebar-tab-placeholder" class="left-sidebar-tab-placeholder">
+        </div>
+        <div id="upper-right-area" class="upper-right-area">
+            <!-- Google Maps -->
+            <div id="google-map" class="google-maps">
+            </div>
+            <!-- End Google Maps -->
+        </div>
+        <div id="lower-right-area" class="lower-right-area">
+            <div id="filter-area" class="filter-area row grey lighten-5" style="padding-top: 0.25rem">
+                <div id="sort-area" class="sort-area col s5 m5 l3">
+                    <div id="sort-select-container" class="sort-select-container">
+                        <div id="sort-select" class="input-field">
+                            <select id="results-sort">
+                                <option value="distance" selected>Distance</option>
+                                <option value="amenities">Amenities</option>
+                                <option value="rating">Rating</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div id="search-area" class="search-area col s7 m7 l7 offset-l2">
+                    <label for="results-search">
+                        <div id="search-icon" class="search-icon inline-block grey lighten-2">
+                            <div class="svg-container">
+                                <img src="assets/svg/search.svg" class="svg-content" />
+                            </div>
+                        </div>
+                        <div id="search-inputarea" class="search-inputarea inline-block input-field">
+                            <input type="text" id="results-search" name="search-input" placeholder="Type here to search" />
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div id="results-status" class="results-status">
+                <p id="results-status-text" class="results-status-text"></p>
+            </div>
+            <div id="results-area" class="results-area">
+                <!-- Sample result item 
+                <div class="result-item grey lighten-5">
+                    <input id="result-item-radio-1" type="radio" class="hidden" name="result-item-select">
+                    <div>
+                        <div class="result-item-section result-item-section-distance">
+                            <p>
+                                <span class="result-item-section-distance-number">1</span>mi
+                            </p>
+                        </div>
+                        <div class="vertical-divider"></div>
+                        <div class="result-item-section result-item-section-main">
+                            <p class="result-item-section-name">Name</p>
+                            <p>Address</p>
+                        </div>
+                        <div class="vertical-divider"></div>
+                        <div class="result-item-section result-item-section-amenities">
+                            <div class="svg-container">
+                                <svg>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="vertical-divider"></div>
+                        <div class="result-item-section result-item-section-rating">
+                            <div>
+                                <span class="result-item-section-rating-number">2</span>/5
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End sample -->
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="assets/js/main-scripts.js"></script>
+<script src="assets/js/database-scripts.js"></script>
+<script src="assets/js/results-scripts.js"></script>
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?&callback=onGoogleMapsAPILoaded"></script> -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApqJNlgAOhhTF4zqTwfSe0IuRtfxoM_dM&callback=onGoogleMapsAPILoaded"></script>
+
+</html>

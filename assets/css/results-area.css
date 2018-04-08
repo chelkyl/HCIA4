@@ -16,23 +16,23 @@
     display: inline-block;
 }
 
-.select-chip {
-    display: flex;
-    flex: auto;
-    flex-direction: row;
-    align-items: center;
+.sort-select-container.input-field {
+    margin-top: 0.7rem;
 }
 
-.select-chip span {
-    flex-basis: 0;
+.select-chip>label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
 }
 
 .select-chip input.select-dropdown {
-    width: 100%;
+    width: calc(100% - 40px);
+    height: 100%;
     border: none;
     margin: 0;
     margin-left: 0.5rem;
-    margin-right: 0.2rem;
 }
 
 .select-chip input.select-dropdown:focus {
@@ -55,6 +55,7 @@
 
 .search-icon {
     width: 3rem;
+    height: 2.5rem;
     padding: 0.75rem;
     padding-top: 0.35rem;
 }
@@ -75,15 +76,28 @@
     overflow: auto;
 }
 
+.results-status {
+    text-align: center;
+}
+
+.results-status.error {
+    background-color: white;
+    border: 1px solid tomato;
+    color: tomato;
+}
+
 .result-item {
     width:100%;
+}
+
+.result-item {
+    margin: 0.2rem 0;
 }
 
 .result-item > div {
     display: grid;
     grid-template-columns: 1fr 0fr 7fr 0fr 3fr 0fr 1fr;
     align-items: center;
-    margin: 0.2rem 0;
     padding: 0.5rem 0;
     color: unset;
     cursor: pointer;
@@ -91,6 +105,7 @@
 
 .result-item input[type=radio]:checked + div {
     background-color: #eee;
+    border: 1px solid var(--colorAccent);
 }
 
 .result-item-section {
@@ -123,6 +138,9 @@
      display: grid;
      grid-template-columns: repeat(6, 1fr);
      grid-auto-rows: 1fr;
+     grid-row-gap: 0.5rem;
+     grid-column-gap: 0.2rem;
+     font-size: 2rem;
      text-align: center;
      padding: 0 0.5rem;
 }
@@ -139,4 +157,15 @@
     border: solid #aaa 1px;
     height: 80%;
     background-color: #aaa;
+}
+@media only screen and (max-width: 992px) {
+    .result-item-section-amenities {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .result-item-section-amenities {
+        grid-template-columns: 1fr 1fr;
+    }
 }
